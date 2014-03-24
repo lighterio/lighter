@@ -1,0 +1,37 @@
+{
+  "name": "lighter",
+  "description": "A lightweight Node.js framework",
+  "keywords": [
+    "lightweight",
+    "fast",
+    "simple",
+    "lighter-load"
+  ],
+  "version": "0.0.0",
+  "main": "api.js",
+  "homepage": "http://github.com/zerious/lighter",
+  "repository": "git://github.com/zerious/lighter.git",
+  "author": "Sam Eubank <sameubank@gmail.com>",
+  "contributors": [
+    "Sam Eubank <sameubank@gmail.com>",
+    "Kaushik Shankar <skaushik92@gmail.com>"
+  ],
+  "engines": [
+    "node >= 0.2.6"
+  ],
+  "scripts": {
+    "test": "./node_modules/istanbul/lib/cli.js test ./node_modules/mocha/bin/_mocha",
+    "report": "open coverage/lcov-report/index.html"
+  },
+  "dependencies": {
+    "lighter-load": "^0.0.1",
+    "express": "^3.4.8"
+  },
+  "devDependencies": {
+    "assert-plus": "~0.1.5",
+    "mocha": "~1.17.1",
+    "istanbul": "~0.2.6",
+    "markdown": "^0.5.0",
+    "ltl": "0.0.1"
+  }
+}
