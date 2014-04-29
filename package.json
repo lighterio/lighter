@@ -2,29 +2,31 @@
   "name": "lighter",
   "description": "A lightweight Node.js framework",
   "keywords": [
-    "lightweight",
-    "fast",
-    "simple",
-    "lighter-load"
+    "lighter"
   ],
   "version": "0.0.0",
-  "main": "api.js",
+  "main": "lighter.js",
   "homepage": "http://github.com/zerious/lighter",
   "repository": "git://github.com/zerious/lighter.git",
+  "bugs": {
+    "url": "http://github.com/zerious/lighter/issues"
+  },
   "author": "Sam Eubank <sameubank@gmail.com>",
   "contributors": [
-    "Sam Eubank <sameubank@gmail.com>",
-    "Kaushik Shankar <skaushik92@gmail.com>"
+    "Sam Eubank <sameubank@gmail.com>"
   ],
+  "license": "MIT",
   "engines": [
     "node >= 0.2.6"
   ],
   "scripts": {
-    "test": "./node_modules/istanbul/lib/cli.js test ./node_modules/mocha/bin/_mocha",
-    "report": "open coverage/lcov-report/index.html"
+    "test": "mocha",
+    "report": "open coverage/lcov-report/index.html",
+    "retest": "mocha --watch",
+    "cover": "istanbul cover _mocha",
+    "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
-    "lighter-load": "^0.0.1",
     "express": "^3.4.8"
   },
   "devDependencies": {
@@ -32,6 +34,7 @@
     "mocha": "~1.17.1",
     "istanbul": "~0.2.6",
     "markdown": "^0.5.0",
-    "ltl": "0.0.1"
+    "ltl": "0.0.1",
+    "zeriousify": "~0.0.1"
   }
 }
