@@ -85,18 +85,16 @@ lighter.setHttpsPort = function (value) {
  * Ascii art to be shown on startup.
  */
 var art = ['',
-	'     .A.     '.red,
-	'    /@@@\\    '.red,
-	'  ./@@'.red + 'A'.yellow + '@@\\.  '.red,
-	' /@@'.red + '/@@@\\'.yellow + '@@\\ '.red,
-	'/@@'.red + '/@@'.yellow + 'A'.white + '@@\\'.yellow + '@@\\'.red,
-	'#@@'.red + '#@'.yellow + '/@\\'.white + '@#'.yellow + '@@#'.red,
+	'     .A.     '.red + ("	 _     _       _     _      v" + lighter.version).grey,
+	'    /@@@\\    '.red + "	| |   (_) __ _| |__ | |_ ___ _ __".grey,
+	'  ./@@'.red + 'A'.yellow + '@@\\.  '.red + "	| |   | |/ _` | '_ \\| __/ _ \\ '__|".grey,
+	' /@@'.red + '/@@@\\'.yellow + '@@\\ '.red + "	| |___| | (_| | | | | ||  __/ |".grey,
+	'/@@'.red + '/@@'.yellow + 'A'.white + '@@\\'.yellow + '@@\\'.red + "	|_____|_|\\__, |_| |_|\\__\\___|_|".grey,
+	'#@@'.red + '#@'.yellow + '/@\\'.white + '@#'.yellow + '@@#'.red + "            |___/".grey,
 	'#@@'.red + '#@'.yellow + '@@@'.white + '@#'.yellow + '@@#'.red,
 	'"#@@'.red + '\\@@@/'.yellow + '@@#"'.red,
 	' \'"#######"\' '.red,
 	''];
-
-log(art.join('\n'));
 
 /**
  * Initialize the framework after the calling module has had a chance to
@@ -104,8 +102,12 @@ log(art.join('\n'));
  */
 setImmediate(function () {
 
+	log(art.join('\n'));
+
 	// Mitigate circular dependency.
 	var App = require('./lib/App');
+
+	log(module.caller);
 
 	if (!(httpsKey && httpsCert)) {
 		httpsPort = null;
