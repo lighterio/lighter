@@ -1,4 +1,5 @@
 var chug = require('chug');
+var colors = require('colors');
 var log = console.log;
 var cwd = process.cwd();
 
@@ -80,6 +81,22 @@ lighter.setHttpsPort = function (value) {
 	httpsPort = value;
 };
 
+/**
+ * Ascii art to be shown on startup.
+ */
+var art = ['',
+	'     .A.     '.red,
+	'    /@@@\\    '.red,
+	'  ./@@'.red + 'A'.yellow + '@@\\.  '.red,
+	' /@@'.red + '/@@@\\'.yellow + '@@\\ '.red,
+	'/@@'.red + '/@@'.yellow + 'A'.white + '@@\\'.yellow + '@@\\'.red,
+	'#@@'.red + '#@'.yellow + '/@\\'.white + '@#'.yellow + '@@#'.red,
+	'#@@'.red + '#@'.yellow + '@@@'.white + '@#'.yellow + '@@#'.red,
+	'"#@@'.red + '\\@@@/'.yellow + '@@#"'.red,
+	' \'"#######"\' '.red,
+	''];
+
+log(art.join('\n'));
 
 /**
  * Initialize the framework after the calling module has had a chance to

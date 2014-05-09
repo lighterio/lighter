@@ -33,7 +33,8 @@
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
-    "chug": "0.1.6"
+    "chug": "0.1.6",
+    "colors": "0.6.2"
   },
   "devDependencies": {
     "assert-plus": "0.1.5",
