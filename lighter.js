@@ -1,6 +1,7 @@
 var chug = require('chug');
 var colors = require('colors');
-var log = console.log;
+var fs = require('fs');
+var log = console.log; // TODO: Use bunyan or winston.
 var cwd = process.cwd();
 
 var httpPort = 9080;
@@ -8,20 +9,18 @@ var httpsPort = 9443;
 var httpsKey = null;
 var httpsCert = null;
 
-var app;
-
-var controllers = [];
-
-var publics = [];
-var scripts = [];
-var styles = [];
-var views = [];
-
 var lighter = module.exports = function () {
 	var App = require('./lib/App');
 	app = app || new App();
 	return app;
 };
+
+var app;
+var controllers = lighter._controllers = [];
+var publics = lighter._publics = [];
+var scripts = lighter._scripts = [];
+var styles = lighter._styles = [];
+var views = lighter._views = [];
 
 var rewritePath = function (path) {
 	return path;
@@ -64,7 +63,7 @@ lighter.addViews = function (item) {
  * Swap out the app server for a different one (like Express).
  */
 lighter.setApp = function (value) {
-	app = value;
+	app = lighter._app = value;
 };
 
 /**
@@ -84,16 +83,16 @@ lighter.setHttpsPort = function (value) {
 /**
  * Ascii art to be shown on startup.
  */
-var art = ['',
-	'     .A.     '.red + ("	 _     _       _     _      v" + lighter.version).grey,
-	'    /@@@\\    '.red + "	| |   (_) __ _| |__ | |_ ___ _ __".grey,
-	'  ./@@'.red + 'A'.yellow + '@@\\.  '.red + "	| |   | |/ _` | '_ \\| __/ _ \\ '__|".grey,
-	' /@@'.red + '/@@@\\'.yellow + '@@\\ '.red + "	| |___| | (_| | | | | ||  __/ |".grey,
-	'/@@'.red + '/@@'.yellow + 'A'.white + '@@\\'.yellow + '@@\\'.red + "	|_____|_|\\__, |_| |_|\\__\\___|_|".grey,
-	'#@@'.red + '#@'.yellow + '/@\\'.white + '@#'.yellow + '@@#'.red + "            |___/".grey,
-	'#@@'.red + '#@'.yellow + '@@@'.white + '@#'.yellow + '@@#'.red,
-	'"#@@'.red + '\\@@@/'.yellow + '@@#"'.red,
-	' \'"#######"\' '.red,
+var asciiArt = ['',
+	'     .A.     '.red + ("  _    _       _     _      v" + lighter.version).grey,
+	'    /@@@\\    '.red + " | |  (_) __ _| |__ | |_ ___ _ __".grey,
+	'  ./@@'.red + 'A'.yellow + '@@\\.  '.red + " | |  | |/ _` | '_ \\| __/ _ \\ '__|".grey,
+	' /@@'.red + '/@@@\\'.yellow + '@@\\ '.red + " | |__| | (_| | | | | ||  __/ |".grey,
+	'/@@'.red + '/@@'.yellow + 'A'.white + '@@\\'.yellow + '@@\\'.red + " |____|_|\\__, |_| |_|\\__\\___|_|".grey,
+	'#@@'.red + '#@'.yellow + '/@\\'.white + '@#'.yellow + '@@#'.red + "          |___/".grey,
+	'#@@'.red + '#@'.yellow + '@@@'.white + '@#'.yellow + '@@#  '.red,
+	'"#@@'.red + '\\@@@/'.yellow + '@@#"  '.red,
+	' \'"#######"\'   '.red,
 	''];
 
 /**
@@ -102,20 +101,46 @@ var art = ['',
  */
 setImmediate(function () {
 
-	log(art.join('\n'));
-
-	// Mitigate circular dependency.
-	var App = require('./lib/App');
-
-	log(module.caller);
-
 	if (!(httpsKey && httpsCert)) {
 		httpsPort = null;
 	}
-	app = app || new App();
-	app.listen(httpPort, httpsPort);
-	log('App listening at ' + httpPort + (httpsPort ? ' and ' + httpsPort : '') + '.');
+	if (!app) {
 
+		// Mitigate circular dependency.
+		var App = require('./lib/App');
+
+		// Ensure the _app key gets written too.
+		lighter.setApp(new App());
+
+		// Augment http.ClientRequest and http.ServerResponse.
+		require('./lib/http');
+	}
+	app.listen(httpPort, httpsPort);
+
+	// Announce the app.
+	try {
+		var caller = require('./package.json');
+		var artLine = 7;
+		asciiArt[8] += 'App: '.grey + caller.name + ' v' + caller.version;
+		if (httpPort || httpsPort) {
+			asciiArt[9] += 'URL: '.grey;
+		}
+		if (httpPort) {
+			asciiArt[9] += 'http://localhost:' + httpPort + '/';
+		}
+		if (httpPort && httpsPort) {
+			asciiArt[9] += ' or ';
+		}
+		if (httpsPort) {
+			asciiArt[9] += 'https://localhost:' + httpsPort + '/';
+		}
+	}
+	catch (e) {
+		throw 'A package.json must exist in the directory Lighter is called from.';
+	}
+	log(asciiArt.join('\n'));
+
+	// Pass the lighter app to Chug so it can route static assets.
 	chug.setApp(app);
 	chug.enableShrinking();
 
@@ -140,28 +165,105 @@ setImmediate(function () {
 			}
 		}
 	});
+	verbosify(controllers, "Controller");
 
+	// TODO: Allow an override for this.
 	publics.push('public');
 	publics = chug(publics).compile().route().watch();
+	verbosify(publics, "Public file");
 
+	// TODO: Allow an override for this.
 	views.push('views');
 	views = chug(views).compile().watch();
+	verbosify(views, "View");
 
+	// TODO: Allow an override for this.
 	scripts.push('scripts');
-	scripts = chug(scripts).compile().watch().concat('/all.js').route();
+	scripts = chug(scripts).compile().watch();
+	var allScripts = scripts.concat('/all.js').route();
+	verbosify(scripts, "Script");
 
+	// TODO: Allow an override for this.
 	styles.push('styles');
-	styles = chug(styles).compile().watch().concat('/all.css').route();
+	styles = chug(styles).compile().watch();
+	var allStyles = styles.concat('/all.css').route();
+	verbosify(styles, "Style");
 
 	chug.onceReady(function () {
-		console.log('Assets loaded.');
-		if (process.env.NODE_ENV != 'dev') {
+
+
+		lighter._views = {};
+		views.assets.forEach(function (asset) {
+			var name = asset.location.replace(/(^.*\/views\/|\.[a-z]+$)/g, '');
+			lighter._views[name] = asset;
+		});
+		lighter._scripts = scripts.assets;
+		lighter._styles = styles.assets;
+
+		if (process.env.NODE_ENV == 'dev') {
+			watchAndExit(cwd);
+			watchAndExit(cwd + '/node_modules/lighter', true);
+			watchAndExit(cwd + '/node_modules/lighter/lib', true);
+			setTimeout(function () {
+				watchAndExit(cwd + '/node_modules', true);
+			}, 1e3);
+		}
+		else {
+			log("Minifying assets... " + "(to disable, run with \"NODE_ENV=dev node app\")".grey);
 			views.minify();
-			scripts.minify();
-			styles.minify();
+			allScripts.minify();
+			allStyles.minify();
 			chug.onceReady(function () {
-				console.log('Assets minified.');
+				log("Views, scripts and styles minified.");
+			});
+
+		}
+
+	});
+
+	// TODO: Once we're using bunyan or something, make these go in as verbose logs?
+	function verbosify(load, singular) {
+		load
+			.onceReady(function () {
+				log(singular + "s loaded. " + ("x" + load.assets.length).grey);
+			})
+			.watch(function () {
+				log(singular + "s reloaded.");
+			});
+	}
+
+	// TODO: Maybe move this to Chug and implement Windows-compatible watching there.
+	var watchCount = 0;
+	function watchAndExit(dir, recursive) {
+		try {
+			watchCount++;
+			if (watchCount < 4e2) {
+				fs.watch(dir, function () {
+					console.log("Exiting due to core file change.");
+					console.log("To run indefinitely, use:\n  " + '"while true; do NODE_ENV=dev node app; done"');
+					process.exit();
+				});
+			}
+		}
+		catch (e) {
+			// Fail silently for now.
+			// fs.watch is not stable, particularly on Mac OS.
+		}
+		if (recursive) {
+			fs.readdir(dir, function (err, files) {
+				if (err) {
+					// If we can't watch this dir, it probably doesn't matter.
+					return;
+				}
+				files.forEach(function (file) {
+					var path = dir + '/' + file;
+					fs.stat(path, function (err, stat) {
+						if (stat.isDirectory()) {
+							watchAndExit(path, recursive);
+						}
+					});
+				});
 			});
 		}
-	});
+	}
 });
