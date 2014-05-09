@@ -147,7 +147,7 @@ setImmediate(function () {
 	controllers.push('controllers');
 	controllers = chug(controllers).require(function (Controller) {
 		var controller = new Controller();
-		var path = rewritePath(this.location.substr(cwd.length + 12).replace(/(|[_]?[cC]ontroller)\.[a-z]+$/, ''));
+		var path = rewritePath(this.location.substr(cwd.length + 12).replace(/(|[iI]ndex)(|_?[cC]ontroller)\.[a-z]+$/, ''));
 		for (var property in controller) {
 			if (typeof controller[property] == 'function') {
 				(function (action) {

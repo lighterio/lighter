@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "lighter.js",
   "homepage": "http://lighter.io/lighter",
   "repository": "git://github.com/zerious/lighter.git",
