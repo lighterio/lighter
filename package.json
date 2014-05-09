@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "lighter.js",
   "homepage": "http://lighter.io/lighter",
   "repository": "git://github.com/zerious/lighter.git",
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "chug": "0.1.8",
-    "ltl": "0.1.8",
+    "ltl": "0.1.2",
     "colors": "0.6.2"
   },
   "devDependencies": {
