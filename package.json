@@ -2,11 +2,18 @@
   "name": "lighter",
   "description": "A lightweight Node.js framework",
   "keywords": [
-    "lighter"
+    "lighter",
+    "isomorphic",
+    "mvc",
+    "http",
+    "https",
+    "router",
+    "express",
+    "alternative"
   ],
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "lighter.js",
-  "homepage": "http://github.com/zerious/lighter",
+  "homepage": "http://lighter.io/lighter",
   "repository": "git://github.com/zerious/lighter.git",
   "bugs": {
     "url": "http://github.com/zerious/lighter/issues"
@@ -15,7 +22,6 @@
   "contributors": [
     "Sam Eubank <sameubank@gmail.com>"
   ],
-  "license": "MIT",
   "engines": [
     "node >= 0.2.6"
   ],
@@ -27,14 +33,21 @@
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
-    "express": "^3.4.8"
+    "chug": "0.1.6"
   },
   "devDependencies": {
-    "assert-plus": "~0.1.5",
-    "mocha": "~1.17.1",
-    "istanbul": "~0.2.6",
+    "assert-plus": "0.1.5",
+    "mocha": "1.17.1",
+    "istanbul": "0.2.6",
+    "express": "3.4.8",
     "markdown": "^0.5.0",
     "ltl": "0.0.1",
-    "zeriousify": "~0.0.1"
-  }
+    "zeriousify": "0.0.1"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/zerious/lighter/blob/master/MIT-LICENSE.md"
+    }
+  ]
 }
