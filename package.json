@@ -37,12 +37,10 @@
   },
   "devDependencies": {
     "assert-plus": "0.1.5",
-    "mocha": "1.17.1",
-    "istanbul": "0.2.6",
+    "mocha": "1.18.2",
+    "istanbul": "0.2.8",
     "express": "3.4.8",
-    "markdown": "^0.5.0",
-    "ltl": "0.0.1",
-    "zeriousify": "0.0.1"
+    "zeriousify": "0.0.6"
   },
   "licenses": [
     {
