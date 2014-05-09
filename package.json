@@ -40,8 +40,9 @@
     "assert-plus": "0.1.5",
     "mocha": "1.18.2",
     "istanbul": "0.2.8",
+    "coveralls": "2.10.0",
     "express": "3.4.8",
-    "zeriousify": "0.0.6"
+    "zeriousify": "0.0.8"
   },
   "licenses": [
     {
