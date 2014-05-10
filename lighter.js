@@ -32,6 +32,11 @@ var rewritePath = function (path) {
 lighter.version = require('./package.json').version;
 
 /**
+ * Expected environments are "dev", "test", "stage", "canary", "prod".
+ */
+lighter._env = process.env.NODE_ENV || 'prod';
+
+/**
  * Allow external public files to be added.
  */
 lighter.addPublics = function (item) {
@@ -95,6 +100,10 @@ var asciiArt = ['',
 	' \'"#######"\'   '.red,
 	''];
 
+lighter.setAsciiArt = function (value) {
+	asciiArt = value;
+};
+
 /**
  * Initialize the framework after the calling module has had a chance to
  * add assets and modify defaults using the API.
@@ -119,20 +128,19 @@ setImmediate(function () {
 
 	// Announce the app.
 	try {
-		var caller = require('./package.json');
-		var artLine = 7;
-		asciiArt[8] += 'App: '.grey + caller.name + ' v' + caller.version;
+		var caller = require(cwd + '/package.json');
+		asciiArt[asciiArt.length - 3] += 'App: '.grey + caller.name + ' v' + caller.version;
 		if (httpPort || httpsPort) {
-			asciiArt[9] += 'URL: '.grey;
+			asciiArt[asciiArt.length - 2] += 'URL: '.grey;
 		}
 		if (httpPort) {
-			asciiArt[9] += 'http://localhost:' + httpPort + '/';
+			asciiArt[asciiArt.length - 2] += 'http://localhost:' + httpPort + '/';
 		}
 		if (httpPort && httpsPort) {
-			asciiArt[9] += ' or ';
+			asciiArt[asciiArt.length - 2] += ' or ';
 		}
 		if (httpsPort) {
-			asciiArt[9] += 'https://localhost:' + httpsPort + '/';
+			asciiArt[asciiArt.length - 2] += 'https://localhost:' + httpsPort + '/';
 		}
 	}
 	catch (e) {
@@ -200,13 +208,14 @@ setImmediate(function () {
 		lighter._scripts = scripts.assets;
 		lighter._styles = styles.assets;
 
-		if (process.env.NODE_ENV == 'dev') {
-			watchAndExit(cwd);
-			watchAndExit(cwd + '/node_modules/lighter', true);
-			watchAndExit(cwd + '/node_modules/lighter/lib', true);
-			setTimeout(function () {
-				watchAndExit(cwd + '/node_modules', true);
-			}, 1e3);
+		if (lighter._env) {
+
+			// Watch app directories that aren't already being watched.
+			watchAndExit(cwd, /^(\..*|controllers|coverage|node_modules|public|scripts|styles|test|views)$/);
+
+			// For lighter development (for now, for framework development).
+			watchAndExit(cwd + '/node_modules/lighter', /^node_modules$/);
+
 		}
 		else {
 			log("Minifying assets... " + "(to disable, run with \"NODE_ENV=dev node app\")".grey);
@@ -234,7 +243,7 @@ setImmediate(function () {
 
 	// TODO: Maybe move this to Chug and implement Windows-compatible watching there.
 	var watchCount = 0;
-	function watchAndExit(dir, recursive) {
+	function watchAndExit(dir, ignorePattern) {
 		try {
 			watchCount++;
 			if (watchCount < 4e2) {
@@ -249,21 +258,21 @@ setImmediate(function () {
 			// Fail silently for now.
 			// fs.watch is not stable, particularly on Mac OS.
 		}
-		if (recursive) {
-			fs.readdir(dir, function (err, files) {
-				if (err) {
-					// If we can't watch this dir, it probably doesn't matter.
-					return;
-				}
-				files.forEach(function (file) {
+		fs.readdir(dir, function (err, files) {
+			if (err) {
+				// If we can't watch this dir, it probably doesn't matter.
+				return;
+			}
+			files.forEach(function (file) {
+				if (!ignorePattern.test(file)) {
 					var path = dir + '/' + file;
 					fs.stat(path, function (err, stat) {
 						if (stat.isDirectory()) {
-							watchAndExit(path, recursive);
+							watchAndExit(path, ignorePattern);
 						}
 					});
-				});
+				}
 			});
-		}
+		});
 	}
 });

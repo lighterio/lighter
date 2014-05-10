@@ -157,3 +157,6 @@ Set the port that you would like Lighter to use for HTTP.
 
 #### setHttpsPort(port)
 Set the port that you would like Lighter to use for HTTPS.
+
+#### setAsciiArt(art)
+Set an array of lines that you would like to be displayed upon startup.
