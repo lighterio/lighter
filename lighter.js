@@ -208,7 +208,7 @@ setImmediate(function () {
 		lighter._scripts = scripts.assets;
 		lighter._styles = styles.assets;
 
-		if (lighter._env) {
+		if (lighter._env == 'dev') {
 
 			// Watch app directories that aren't already being watched.
 			watchAndExit(cwd, /^(\..*|controllers|coverage|node_modules|public|scripts|styles|test|views)$/);
