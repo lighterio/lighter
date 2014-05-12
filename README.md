@@ -119,44 +119,52 @@ Models are coming soon...
 
 ### Views
 
-Views can be placed into the views directory, and they automagically get loaded
-with Chug. There will be a shorthand for rendering views (probably response.view),
-but for now, if you save a view into `/views/hello.ltl`, you could do something
-like this:
+Views are rendered by name from `response.view`.
 
-```bash
-var chug = require('chug');
-var hello = chug.assets[process.cwd() + '/views/hello.ltl'];
-response.end(hello({name: request.query.name}));
+The following would render a template that is stored at `/views/hello.ltl` with a
+context indicating who to say hello to.
+```javascript
+function GET(request, response) {
+	response.view('hello', {who: 'World'});
+}
 ```
 
 ## API
 
-#### addPublics(Array|string location)
+#### lighter.addPublics(Array|string location)
 The `location` argument can be a single location or an array of locations. Lighter
 adds this location to the array of public file locations to be chugged.
 
-#### addScripts(Array|string location)
+#### lighter.addScripts(Array|string location)
 The `location` argument can be a single location or an array of locations. Lighter
 adds this location to the array of script file locations to be chugged.
 
-#### addStyles(Array|string location)
+#### lighter.addStyles(Array|string location)
 The `location` argument can be a single location or an array of locations. Lighter
 adds this location to the array of style file locations to be chugged.
 
-#### addViews(Array|string location)
+#### lighter.addViews(Array|string location)
 The `location` argument can be a single location or an array of locations. Lighter
 adds this location to the array of view file locations to be chugged.
 
-#### setApp(Object app)
+#### lighter.setApp(Object app)
 If you would like to use Express (or another framework that exposes
 `app.get(path, callback)` etc., to do your routing, you can set Lighter to do this.
 
-#### setHttpPort(port)
+#### lighter.setHttpPort(port)
 Set the port that you would like Lighter to use for HTTP.
 
-#### setHttpsPort(port)
+#### lighter.setHttpsPort(port)
 Set the port that you would like Lighter to use for HTTPS.
 
-#### setAsciiArt(art)
+#### lighter.setAsciiArt(art)
 Set an array of lines that you would like to be displayed upon startup.
+
+#### lighter.chug
+A reference to the Chug module that Lighter uses.
+
+#### lighter.beams
+A reference to the Beams module that Lighter uses.
+
+#### lighter.colors
+A reference to the Colors module that Lighter uses.

@@ -1,5 +1,3 @@
-var chug = require('chug');
-var colors = require('colors');
 var fs = require('fs');
 var log = console.log; // TODO: Use bunyan or winston.
 var cwd = process.cwd();
@@ -22,6 +20,13 @@ var scripts = lighter._scripts = [];
 var styles = lighter._styles = [];
 var views = lighter._views = [];
 
+lighter._enableChug = true;
+lighter._enableBeams = true;
+lighter._enableColors = true;
+
+/**
+ * TODO: Expose a way to customize the way that controllers are mapped.
+ */
 var rewritePath = function (path) {
 	return path;
 };
@@ -85,19 +90,23 @@ lighter.setHttpsPort = function (value) {
 	httpsPort = value;
 };
 
+var chug = lighter.chug = require('chug');
+var beams = lighter.beams = require('beams');
+var colors = lighter.colors = require('colors');
+
 /**
  * Ascii art to be shown on startup.
  */
 var asciiArt = ['',
-	'     .A.     '.red + ("  _    _       _     _      v" + lighter.version).grey,
-	'    /@@@\\    '.red + " | |  (_) __ _| |__ | |_ ___ _ __".grey,
-	'  ./@@'.red + 'A'.yellow + '@@\\.  '.red + " | |  | |/ _` | '_ \\| __/ _ \\ '__|".grey,
-	' /@@'.red + '/@@@\\'.yellow + '@@\\ '.red + " | |__| | (_| | | | | ||  __/ |".grey,
-	'/@@'.red + '/@@'.yellow + 'A'.white + '@@\\'.yellow + '@@\\'.red + " |____|_|\\__, |_| |_|\\__\\___|_|".grey,
-	'#@@'.red + '#@'.yellow + '/@\\'.white + '@#'.yellow + '@@#'.red + "          |___/".grey,
-	'#@@'.red + '#@'.yellow + '@@@'.white + '@#'.yellow + '@@#  '.red,
-	'"#@@'.red + '\\@@@/'.yellow + '@@#"  '.red,
-	' \'"#######"\'   '.red,
+	'     .A.     '.red.bold + ("  _    _       _     _      v" + lighter.version).grey,
+	'    /@@@\\    '.red.bold + " | |  (_) __ _| |__ | |_ ___ _ __".grey.bold,
+	'  ./@@'.red.bold + 'A'.yellow.bold + '@@\\.  '.red.bold + " | |  | |/ _` | '_ \\| __/ _ \\ '__|".grey.bold,
+	' /@@'.red.bold + '/@@@\\'.yellow.bold + '@@\\ '.red.bold + " | |__| | (_| | | | | ||  __/ |".grey.bold,
+	'/@@'.red.bold + '/@@'.yellow.bold + 'A'.white.bold + '@@\\'.yellow.bold + '@@\\'.red.bold + " |____|_|\\__, |_| |_|\\__\\___|_|".grey.bold,
+	'#@@'.red.bold + '#@'.yellow.bold + '/@\\'.white.bold + '@#'.yellow.bold + '@@#'.red.bold + "          |___/".grey.bold,
+	'#@@'.red.bold + '#@'.yellow.bold + '@@@'.white.bold + '@#'.yellow.bold + '@@#  '.red.bold,
+	'"#@@'.red.bold + '\\@@@/'.yellow.bold + '@@#"  '.red.bold,
+	' \'"#######"\'   '.red.bold,
 	''];
 
 lighter.setAsciiArt = function (value) {
@@ -152,6 +161,27 @@ setImmediate(function () {
 	chug.setApp(app);
 	chug.enableShrinking();
 
+	// Set up Beams for this app.
+	beams.setApp(app);
+
+	// Add Jymin, for fun.
+	lighter.addScripts([
+		'node_modules/lighter/node_modules/jymin/jymin.js'
+	]);
+
+	// Add the scripts that Beams will need.
+	lighter.addScripts([
+		'node_modules/lighter/node_modules/beams/scripts/beams-jymin.js'
+	]);
+
+	// Allow Chug to watch for changes.
+	if (lighter._env == 'dev') {
+		lighter.addScripts('node_modules/lighter/scripts/lighter-beams.js');
+		chug.onReady(function () {
+			beams.emit('chug:change', 'ready');
+		});
+	}
+
 	controllers.push('controllers');
 	controllers = chug(controllers).require(function (Controller) {
 		var controller = new Controller();
@@ -198,7 +228,6 @@ setImmediate(function () {
 	verbosify(styles, "Style");
 
 	chug.onceReady(function () {
-
 
 		lighter._views = {};
 		views.assets.forEach(function (asset) {
