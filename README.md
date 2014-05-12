@@ -160,11 +160,40 @@ Set the port that you would like Lighter to use for HTTPS.
 #### lighter.setAsciiArt(art)
 Set an array of lines that you would like to be displayed upon startup.
 
-#### lighter.chug
+#### Object lighter.chug
 A reference to the Chug module that Lighter uses.
 
-#### lighter.beams
+#### Object lighter.beams
 A reference to the Beams module that Lighter uses.
 
-#### lighter.colors
+#### Object lighter.colors
 A reference to the Colors module that Lighter uses.
+
+#### Object lighter.app
+A reference to the Express-like app that's been set via `lighter.setApp(app)`.
+
+#### Array|Object lighter.publics
+The files that have been added via `lighter.setPublic(location)` or
+found in the `publics/` directory.
+
+#### Array|Object lighter.scripts
+The scripts that have been added via `lighter.setPublic(location)` or
+found in the `scripts/` directory.
+
+#### Array|Object lighter.styles
+The stylesheets that have been added via `lighter.setPublic(location)` or
+found in the `styles/` directory.
+
+#### Array|Object lighter.views
+The views that have been added via `lighter.setPublic(location)` or
+found in the `views/` directory.
+
+#### Array|Object lighter.controllers
+The controllers that have been found in the `controllers/` directory.
+
+#### Array|Object lighter.models
+The models that have been found in the `models/` directory.
+
+#### lighter.env
+The environment string that comes from process.env.NODE_ENV.  Expected values
+are `dev`, `test`, `stage`, `canary` or `prod`.

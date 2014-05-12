@@ -7,22 +7,14 @@ var httpsPort = 9443;
 var httpsKey = null;
 var httpsCert = null;
 
-var lighter = module.exports = function () {
-	var App = require('./lib/App');
-	app = app || new App();
-	return app;
-};
+var lighter = module.exports = {};
 
 var app;
-var controllers = lighter._controllers = [];
-var publics = lighter._publics = [];
-var scripts = lighter._scripts = [];
-var styles = lighter._styles = [];
-var views = lighter._views = [];
-
-lighter._enableChug = true;
-lighter._enableBeams = true;
-lighter._enableColors = true;
+var controllers = lighter.controllers = [];
+var publics = lighter.publics = [];
+var scripts = lighter.scripts = [];
+var styles = lighter.styles = [];
+var views = lighter.views = [];
 
 /**
  * TODO: Expose a way to customize the way that controllers are mapped.
@@ -39,7 +31,7 @@ lighter.version = require('./package.json').version;
 /**
  * Expected environments are "dev", "test", "stage", "canary", "prod".
  */
-lighter._env = process.env.NODE_ENV || 'prod';
+lighter.env = process.env.NODE_ENV || 'prod';
 
 /**
  * Allow external public files to be added.
@@ -73,7 +65,7 @@ lighter.addViews = function (item) {
  * Swap out the app server for a different one (like Express).
  */
 lighter.setApp = function (value) {
-	app = lighter._app = value;
+	app = lighter.app = value;
 };
 
 /**
@@ -175,7 +167,7 @@ setImmediate(function () {
 	]);
 
 	// Allow Chug to watch for changes.
-	if (lighter._env == 'dev') {
+	if (lighter.env == 'dev') {
 		lighter.addScripts('node_modules/lighter/scripts/lighter-beams.js');
 		chug.onReady(function () {
 			beams.emit('chug:change', 'ready');
@@ -229,15 +221,15 @@ setImmediate(function () {
 
 	chug.onceReady(function () {
 
-		lighter._views = {};
+		lighter.views = {};
 		views.assets.forEach(function (asset) {
 			var name = asset.location.replace(/(^.*\/views\/|\.[a-z]+$)/g, '');
-			lighter._views[name] = asset;
+			lighter.views[name] = asset;
 		});
-		lighter._scripts = scripts.assets;
-		lighter._styles = styles.assets;
+		lighter.scripts = scripts.assets;
+		lighter.styles = styles.assets;
 
-		if (lighter._env == 'dev') {
+		if (lighter.env == 'dev') {
 
 			// Watch app directories that aren't already being watched.
 			watchAndExit(cwd, /^(\..*|controllers|coverage|node_modules|public|scripts|styles|test|views)$/);
