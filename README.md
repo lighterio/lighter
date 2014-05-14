@@ -131,6 +131,10 @@ function GET(request, response) {
 
 ## API
 
+#### lighter.addControllers(Array|string location)
+The `location` argument can be a single location or an array of locations. Lighter
+adds this location to the array of controller locations to be chugged.
+
 #### lighter.addPublics(Array|string location)
 The `location` argument can be a single location or an array of locations. Lighter
 adds this location to the array of public file locations to be chugged.
@@ -150,6 +154,9 @@ adds this location to the array of view file locations to be chugged.
 #### lighter.setApp(Object app)
 If you would like to use Express (or another framework that exposes
 `app.get(path, callback)` etc., to do your routing, you can set Lighter to do this.
+
+#### lighter.setLogger(Object logger)
+Set an alternative logger that exposes `logger.log(message)`.
 
 #### lighter.setHttpPort(port)
 Set the port that you would like Lighter to use for HTTP.
@@ -171,6 +178,9 @@ A reference to the Colors module that Lighter uses.
 
 #### Object lighter.app
 A reference to the Express-like app that's been set via `lighter.setApp(app)`.
+
+#### Object lighter.logger
+A reference to the logger that's been set via `lighter.setLogger(logger)`.
 
 #### Array|Object lighter.publics
 The files that have been added via `lighter.setPublic(location)` or
