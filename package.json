@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.0",
+  "version": "0.1.2",
   "main": "lighter.js",
   "homepage": "http://lighter.io/lighter",
   "repository": "git://github.com/zerious/lighter.git",
@@ -39,7 +39,8 @@
     "beams": "0.0.4",
     "jymin": "0.1.6",
     "qs": "0.6.6",
-    "chip": "0.0.3"
+    "chip": "0.0.3",
+    "sequelize": "1.7.5"
   },
   "devDependencies": {
     "assert-plus": "0.1.5",
