@@ -14,5 +14,5 @@ logs
 results
 coverage
 node_modules
-
 build
+config.json

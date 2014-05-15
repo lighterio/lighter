@@ -11,89 +11,110 @@ var env = process.env.NODE_ENV || 'prod';
  */
 var lighter = module.exports = function (options) {
 
-	var settings = lighter.settings = {
-		env: env,
-		dir: cwd,
-		server: null,
-		hostName: '127.0.0.1',
-		httpPort: 8888,
+  var settings = lighter.settings = {
+    env: env,
+    dir: cwd,
+    server: null,
+    hostName: '127.0.0.1',
+    httpPort: 8888,
     dbs: {},
-		httpsPort: null,
-		httpsKey: null,
-		httpsCert: null,
-		controllers: ['controllers'],
-		publics: ['public'],
-		scripts: {'/all.js': ['scripts']},
-		styles: {'/all.css': ['styles']},
-		views: ['views'],
-		logger: null,
+    httpsPort: null,
+    httpsKey: null,
+    httpsCert: null,
+    controllers: ['controllers'],
+    publics: ['public'],
+    scripts: {'/all.js': ['scripts']},
+    styles: {'/all.css': ['styles']},
+    views: ['views'],
+    logger: null,
     logLevel: (env == 'prod' ? 'info' : 'log'),
-		asciiArt: ['',
-			'     .A.     '.red.bold + ("  _    _       _     _      v" + lighter.version).grey,
-			'    /@@@\\    '.red.bold + " | |  (_) __ _| |__ | |_ ___ _ __".grey.bold,
-			'  ./@@'.red.bold + 'A'.yellow.bold + '@@\\.  '.red.bold + " | |  | |/ _` | '_ \\| __/ _ \\ '__|".grey.bold,
-			' /@@'.red.bold + '/@@@\\'.yellow.bold + '@@\\ '.red.bold + " | |__| | (_| | | | | ||  __/ |".grey.bold,
-			'/@@'.red.bold + '/@@'.yellow.bold + 'A'.white.bold + '@@\\'.yellow.bold + '@@\\'.red.bold + " |____|_|\\__, |_| |_|\\__\\___|_|".grey.bold,
-			'#@@'.red.bold + '#@'.yellow.bold + '/@\\'.white.bold + '@#'.yellow.bold + '@@#'.red.bold + "          |___/".grey.bold,
-			'#@@'.red.bold + '#@'.yellow.bold + '@@@'.white.bold + '@#'.yellow.bold + '@@#  '.red.bold,
-			'"#@@'.red.bold + '\\@@@/'.yellow.bold + '@@#"  '.red.bold,
-			' \'"#######"\'   '.red.bold,
-			''],
-		enableChug: true,
-		enableBeams: true,
-		enableCluster: (env != 'dev'),
-		formatControllerPath: function (path) { return path; }
-	};
+    asciiArt: ['',
+      '     .A.     '.red.bold + ("  _    _       _     _      v" + lighter.version).grey,
+      '    /@@@\\    '.red.bold + " | |  (_) __ _| |__ | |_ ___ _ __".grey.bold,
+      '  ./@@'.red.bold + 'A'.yellow.bold + '@@\\.  '.red.bold + " | |  | |/ _` | '_ \\| __/ _ \\ '__|".grey.bold,
+      ' /@@'.red.bold + '/@@@\\'.yellow.bold + '@@\\ '.red.bold + " | |__| | (_| | | | | ||  __/ |".grey.bold,
+      '/@@'.red.bold + '/@@'.yellow.bold + 'A'.white.bold + '@@\\'.yellow.bold + '@@\\'.red.bold + " |____|_|\\__, |_| |_|\\__\\___|_|".grey.bold,
+      '#@@'.red.bold + '#@'.yellow.bold + '/@\\'.white.bold + '@#'.yellow.bold + '@@#'.red.bold + "          |___/".grey.bold,
+      '#@@'.red.bold + '#@'.yellow.bold + '@@@'.white.bold + '@#'.yellow.bold + '@@#  '.red.bold,
+      '"#@@'.red.bold + '\\@@@/'.yellow.bold + '@@#"  '.red.bold,
+      ' \'"#######"\'   '.red.bold,
+      ''],
+    enableChug: true,
+    enableBeams: true,
+    enableSplode: true,
+    enableCluster: (env != 'dev'),
+    formatControllerPath: function (path) { return path; }
+  };
 
-	for (var key in options) {
-		if (typeof settings[key] == 'undefined') {
-			console.error('Unknown Lighter option: "' + key + '".');
-		}
-		else {
-			settings[key] = options[key];
-		}
-	}
-	options = null;
+  for (var key in options) {
+    if (typeof settings[key] == 'undefined') {
+      console.error('Unknown Lighter option: "' + key + '".');
+    }
+    else {
+      settings[key] = options[key];
+    }
+  }
+  options = null;
 
-	var log = lighter.logger = settings.logger || chip('console');
+  if (settings.dir != cwd) {
+    cwd = settings.dir;
+  }
+
+  try {
+    var overrides = require(cwd + '/overrides.json');
+    for (var key in overrides) {
+      if (typeof settings[key] == 'undefined') {
+        console.error('Unknown Lighter override: "' + key + '".');
+      }
+      else {
+        settings[key] = overrides[key];
+      }
+    }
+  }
+  catch (e) {
+    // No overrides, no worries.
+  }
+
+  var log = lighter.logger = settings.logger || chip('console');
   if (log.setLevel) {
     log.setLevel(settings.logLevel);
   }
 
-	lighter.env = settings.env;
+  lighter.env = settings.env;
 
-	if (settings.dir != cwd) {
-		cwd = settings.dir;
-	}
+  var serverName;
+  var asciiArt = settings.asciiArt;
+  var hostName = settings.hostName;
+  var httpPort = settings.httpPort;
+  var httpsPort = settings.httpsPort;
 
-	var serverName;
-	var asciiArt = settings.asciiArt;
-	var hostName = settings.hostName;
-	var httpPort = settings.httpPort;
-	var httpsPort = settings.httpsPort;
+  if (settings.enableSplode) {
+    var splode = require('splode');
+    splode.setLogger(log);
+  }
 
-	if (cluster.isMaster) {
-		try {
-			var json = require(cwd + '/package.json');
-			serverName = json.name + ' v' + json.version;
-		}
-		catch (e) {
-			throw 'A package.json must exist in the directory Lighter is called from.';
-		}
-		asciiArt[asciiArt.length - 3] += 'App: '.grey + serverName;
-		if (httpPort || httpsPort) {
-			asciiArt[asciiArt.length - 2] += 'URL: '.grey;
-		}
-		if (httpPort) {
-			asciiArt[asciiArt.length - 2] += 'http://' + hostName + ':' + httpPort + '/';
-		}
-		if (httpPort && httpsPort) {
-			asciiArt[asciiArt.length - 2] += ' or ';
-		}
-		if (httpsPort) {
-			asciiArt[asciiArt.length - 2] += 'https://' + hostName + ':' + httpsPort + '/';
-		}
-		console.log(asciiArt.join('\n'));
+  if (cluster.isMaster) {
+    try {
+      var json = require(cwd + '/package.json');
+      serverName = json.name + ' v' + json.version;
+    }
+    catch (e) {
+      throw 'A package.json must exist in the directory Lighter is called from.';
+    }
+    asciiArt[asciiArt.length - 3] += 'App: '.grey + serverName;
+    if (httpPort || httpsPort) {
+      asciiArt[asciiArt.length - 2] += 'URL: '.grey;
+    }
+    if (httpPort) {
+      asciiArt[asciiArt.length - 2] += 'http://' + hostName + ':' + httpPort + '/';
+    }
+    if (httpPort && httpsPort) {
+      asciiArt[asciiArt.length - 2] += ' or ';
+    }
+    if (httpsPort) {
+      asciiArt[asciiArt.length - 2] += 'https://' + hostName + ':' + httpsPort + '/';
+    }
+    console.log(asciiArt.join('\n'));
 
     if (settings.enableCluster) {
       os.cpus().forEach(function () {
@@ -103,14 +124,14 @@ var lighter = module.exports = function (options) {
         process.exit();
       });
     }
-	}
+  }
 
   if (!cluster.isMaster || !settings.enableCluster) {
 
     if (settings.server) {
       lighter.server = settings.server;
     } else {
-      var Server = require('./lib/Server')
+      var Server = require('./lib/Server');
       lighter.server = new Server();
       require('./lib/http');
     }
@@ -268,13 +289,13 @@ var lighter = module.exports = function (options) {
           var Database = require('sequelize');
           var db = settings.dbs[dbKey];
           db = new Database(
-            db.schema || db.database || db.db,
-            db.user || db.username,
-            db.pass || db.password,
+            db.name || dbKey,
+            db.user,
+            db.pass,
             {
-              dialect: db.type || db.driver || db.dialect || 'mysql',
-              host: db.host || db.hostname,
-              port: db.port || 3306,
+              dialect: db.type || 'mysql',
+              host: db.host || '127.0.0.1',
+              port: db.port,
               logging: log.trace
             }
           );
@@ -288,6 +309,11 @@ var lighter = module.exports = function (options) {
               }
             });
           lighter.dbs[dbKey] = db;
+
+          // Expose the first database as "db".
+          if (!lighter.db) {
+            lighter.db = db;
+          }
       }
     }
   }
