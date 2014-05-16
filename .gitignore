@@ -12,7 +12,9 @@
 pids
 logs
 results
-coverage
+coveragewhat
 node_modules
 build
 config.json
+
+coverage

@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "lighter.js",
   "homepage": "http://lighter.io/lighter",
   "repository": "git://github.com/zerious/lighter.git",
@@ -38,15 +38,14 @@
     "colors": "0.6.2",
     "beams": "0.0.4",
     "jymin": "0.1.6",
-    "qs": "0.6.6",
     "chip": "0.0.3",
     "sequelize": "1.7.5",
-    "splode": "0.0.1"
+    "za": "0.0.1"
   },
   "devDependencies": {
     "assert-plus": "0.1.5",
     "mocha": "1.18.2",
-    "istanbul": "0.2.9",
+    "istanbul": "0.2.10",
     "coveralls": "2.10.0",
     "express": "4.2.0",
     "zeriousify": "0.1.4"
