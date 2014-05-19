@@ -9,7 +9,7 @@ describe('API', function () {
 		var write = process.stdout.write;
 		var app = lighter({
 			dir: process.cwd() + '/test/testFiles',
-			logger: require('chip')('blackhole')
+			logger: require('cedar')('blackhole')
 		});
 		process.stdout.write = write;
 	});
