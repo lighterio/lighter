@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.12",
+  "version": "0.1.14",
   "main": "lighter.js",
   "homepage": "http://lighter.io/lighter",
   "repository": "git://github.com/zerious/lighter.git",
@@ -33,8 +33,8 @@
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
-    "chug": "0.1.16",
-    "ltl": "0.1.3",
+    "chug": "0.1.17",
+    "ltl": "0.1.4",
     "beams": "0.0.5",
     "jymin": "0.1.6",
     "cedar": "0.0.9",
@@ -47,7 +47,7 @@
     "mocha": "1.19.0",
     "istanbul": "0.2.10",
     "coveralls": "2.10.0",
-    "express": "4.3.0",
+    "express": "4.3.1",
     "zeriousify": "0.1.4"
   },
   "licenses": [
