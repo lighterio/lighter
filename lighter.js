@@ -1,4 +1,4 @@
-var App = require('./lib/classes/App');
+var App = require('./lib/App');
 
 /**
  * Start a Lighter server with some options.

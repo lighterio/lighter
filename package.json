@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.8",
+  "version": "0.1.9",
   "main": "lighter.js",
   "homepage": "http://lighter.io/lighter",
   "repository": "git://github.com/zerious/lighter.git",
@@ -37,17 +37,17 @@
     "ltl": "0.1.2",
     "beams": "0.0.5",
     "jymin": "0.1.6",
-    "cedar": "0.0.7",
-    "sequelize": "1.7.5",
+    "cedar": "0.0.8",
     "za": "0.0.2",
-    "splode": "0.0.2"
+    "splode": "0.0.2",
+    "ormy": "0.0.1"
   },
   "devDependencies": {
     "assert-plus": "0.1.5",
     "mocha": "1.19.0",
     "istanbul": "0.2.10",
     "coveralls": "2.10.0",
-    "express": "4.2.0",
+    "express": "4.3.0",
     "zeriousify": "0.1.4"
   },
   "licenses": [
