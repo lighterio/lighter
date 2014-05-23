@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.9",
+  "version": "0.1.10",
   "main": "lighter.js",
   "homepage": "http://lighter.io/lighter",
   "repository": "git://github.com/zerious/lighter.git",
@@ -33,7 +33,7 @@
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
-    "chug": "0.1.15",
+    "chug": "0.1.16",
     "ltl": "0.1.2",
     "beams": "0.0.5",
     "jymin": "0.1.6",
