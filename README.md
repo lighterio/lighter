@@ -95,15 +95,15 @@ var Controller = require('lighter/lib/Controller');
 
 module.exports = Controller.extend({
 
-	index: function GET(request, response) {
-		response.writeHead(200, {'content-type': 'text/html'});
-		response.end('TODO: Show contact info and a form.');
-	},
+  index: function GET(request, response) {
+    response.writeHead(200, {'content-type': 'text/html'});
+    response.end('TODO: Show contact info and a form.');
+  },
 
-	send: function POST(request, response) {
-		response.writeHead(200, {'content-type': 'text/html'});
-		response.end('TODO: Thank the user for contacting us.');
-	}
+  send: function POST(request, response) {
+    response.writeHead(200, {'content-type': 'text/html'});
+    response.end('TODO: Thank the user for contacting us.');
+  }
 
 });
 ```
@@ -125,7 +125,7 @@ The following would render a template that is stored at `/views/hello.ltl` with 
 context indicating who to say hello to.
 ```javascript
 function GET(request, response) {
-	response.view('hello', {who: 'World'});
+  response.view('hello', {who: 'World'});
 }
 ```
 
