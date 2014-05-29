@@ -33,21 +33,21 @@
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
-    "chug": "0.1.21",
+    "chug": "0.1.22",
     "ltl": "0.1.5",
     "beams": "0.0.5",
     "jymin": "0.1.7",
     "cedar": "0.0.12",
-    "za": "0.0.6",
+    "za": "0.0.7",
     "splode": "0.0.2",
-    "ormy": "0.0.3"
+    "ormy": "0.0.4"
   },
   "devDependencies": {
     "assert-plus": "0.1.5",
     "mocha": "1.20.0",
     "istanbul": "0.2.10",
     "coveralls": "2.10.0",
-    "express": "4.3.1",
+    "express": "4.3.2",
     "zeriousify": "0.1.5"
   },
   "licenses": [
