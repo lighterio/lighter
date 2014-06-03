@@ -11,10 +11,10 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.21",
+  "version": "0.1.22",
   "main": "lighter.js",
   "bin": {
-    "lighter": "commands/cli"
+    "lighter": "commands/cli.js"
   },
   "homepage": "http://lighter.io/lighter",
   "repository": "git://github.com/zerious/lighter.git",
