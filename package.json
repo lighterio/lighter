@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.23",
+  "version": "0.1.24",
   "main": "lighter.js",
   "bin": {
     "lighter": "commands/cli.js"
@@ -41,7 +41,7 @@
     "beams": "0.0.6",
     "jymin": "0.1.11",
     "cedar": "0.0.12",
-    "za": "0.0.12",
+    "za": "0.0.13",
     "splode": "0.0.2",
     "ormy": "0.0.4",
     "shellify": "0.0.2",
