@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.27",
+  "version": "0.1.28",
   "main": "lighter.js",
   "bin": {
     "lighter": "commands/cli.js"
@@ -39,7 +39,7 @@
     "chug": "0.1.27",
     "ltl": "0.1.6",
     "beams": "0.0.8",
-    "jymin": "0.2.0",
+    "jymin": "0.2.1",
     "cedar": "0.0.12",
     "za": "0.0.13",
     "splode": "0.0.2",
