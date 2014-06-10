@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.33",
+  "version": "0.1.34",
   "main": "lighter.js",
   "bin": {
     "lighter": "commands/cli.js"
@@ -38,7 +38,7 @@
   "dependencies": {
     "chug": "0.1.27",
     "ltl": "0.1.7",
-    "beams": "0.0.9",
+    "beams": "0.0.10",
     "jymin": "0.2.2",
     "cedar": "0.0.12",
     "za": "0.0.13",
@@ -51,9 +51,9 @@
   "devDependencies": {
     "assert-plus": "0.1.5",
     "mocha": "1.20.1",
-    "istanbul": "0.2.10",
+    "istanbul": "0.2.11",
     "coveralls": "2.10.0",
-    "express": "4.4.1",
+    "express": "4.4.2",
     "zeriousify": "0.1.5"
   },
   "licenses": [
