@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.31",
+  "version": "0.1.32",
   "main": "lighter.js",
   "bin": {
     "lighter": "commands/cli.js"
@@ -45,7 +45,8 @@
     "splode": "0.0.2",
     "ormy": "0.0.4",
     "shellify": "0.0.2",
-    "d6": "0.0.6"
+    "d6": "0.0.6",
+    "mc": "1.0.6"
   },
   "devDependencies": {
     "assert-plus": "0.1.5",
