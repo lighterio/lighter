@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.35",
+  "version": "0.1.36",
   "main": "lighter.js",
   "bin": {
     "lighter": "commands/cli.js"
@@ -36,16 +36,16 @@
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
-    "chug": "0.1.27",
-    "ltl": "0.1.7",
-    "beams": "0.0.10",
-    "jymin": "0.2.2",
-    "cedar": "0.0.12",
-    "za": "0.0.14",
+    "chug": "0.1.30",
+    "ltl": "0.1.9",
+    "beams": "0.0.12",
+    "jymin": "0.2.5",
+    "cedar": "0.0.13",
+    "za": "0.0.15",
     "splode": "0.0.2",
-    "ormy": "0.0.5",
+    "ormy": "0.0.7",
     "shellify": "0.0.2",
-    "d6": "0.0.6",
+    "d6": "0.0.7",
     "mc": "1.0.6"
   },
   "devDependencies": {
