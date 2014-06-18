@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.39",
+  "version": "0.1.40",
   "main": "lighter.js",
   "bin": {
     "lighter": "commands/cli.js"
@@ -43,7 +43,7 @@
     "cedar": "0.0.14",
     "za": "0.0.16",
     "splode": "0.0.2",
-    "ormy": "0.1.0",
+    "ormy": "0.1.1",
     "shellify": "0.0.2",
     "d6": "0.0.9",
     "mc": "1.0.6"
