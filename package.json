@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.51",
+  "version": "0.1.52",
   "main": "lighter.js",
   "bin": {
     "lighter": "commands/cli.js"
@@ -39,13 +39,13 @@
     "chug": "0.1.37",
     "ltl": "0.1.13",
     "beams": "0.0.16",
-    "jymin": "0.3.0",
-    "cedar": "0.0.14",
+    "jymin": "0.3.1",
+    "cedar": "0.0.15",
     "za": "0.0.17",
     "splode": "0.0.2",
     "ormy": "0.1.4",
     "shellify": "0.0.2",
-    "d6": "0.1.3",
+    "d6": "0.1.4",
     "mc": "1.0.6"
   },
   "devDependencies": {
