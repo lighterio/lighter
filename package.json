@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.55",
+  "version": "0.1.56",
   "main": "lighter.js",
   "bin": {
     "lighter": "commands/cli.js"
@@ -36,7 +36,7 @@
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
-    "chug": "0.1.38",
+    "chug": "0.2.0",
     "ltl": "0.1.13",
     "beams": "0.0.16",
     "jymin": "0.3.1",
