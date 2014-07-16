@@ -2,7 +2,7 @@
 var shellify = require('shellify');
 
 shellify({
-  root: require.resolve('lighter').replace(/\/lighter\.js$/, '/'),
+  root: require.resolve('lighter').replace(/[\/\\]lighter\.js$/, '/'),
   commands: {
     debug: {
       note: 'Starts the app as a "debug" environment',
