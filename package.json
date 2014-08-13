@@ -17,9 +17,9 @@
     "lighter": "commands/cli.js"
   },
   "homepage": "http://lighter.io/lighter",
-  "repository": "git://github.com/zerious/lighter.git",
+  "repository": "git://github.com/lighterio/lighter.git",
   "bugs": {
-    "url": "http://github.com/zerious/lighter/issues"
+    "url": "http://github.com/lighterio/lighter/issues"
   },
   "author": "Sam Eubank <sameubank@gmail.com>",
   "contributors": [
@@ -29,11 +29,11 @@
     "node >= 0.2.6"
   ],
   "scripts": {
-    "test": "mocha",
+    "test": "./node_modules/exam/exam.js",
+    "retest": "./node_modules/exam/exam.js --watch",
+    "cover": "istanbul cover ./node_modules/exam/exam.js",
     "report": "open coverage/lcov-report/index.html",
-    "retest": "mocha --watch",
-    "cover": "istanbul cover _mocha",
-    "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+    "coveralls": "istanbul cover ./node_modules/exam/exam.js --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
     "chug": "0.2.0",
@@ -49,17 +49,16 @@
     "mc": "1.0.6"
   },
   "devDependencies": {
-    "assert-plus": "0.1.5",
-    "mocha": "1.20.1",
+    "exam": "0.0.5",
     "istanbul": "0.3.0",
     "coveralls": "2.11.1",
     "express": "4.6.1",
-    "zeriousify": "0.1.6"
+    "zeriousify": "0.1.9"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://github.com/zerious/lighter/blob/master/MIT-LICENSE.md"
+      "url": "http://github.com/lighterio/lighter/blob/master/MIT-LICENSE.md"
     }
   ]
 }

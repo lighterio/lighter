@@ -1,10 +1,10 @@
 # Lighter
 
 [![NPM Version](https://badge.fury.io/js/lighter.png)](http://badge.fury.io/js/lighter)
-[![Build Status](https://travis-ci.org/zerious/lighter.png?branch=master)](https://travis-ci.org/zerious/lighter)
-[![Code Coverage](https://coveralls.io/repos/zerious/lighter/badge.png?branch=master)](https://coveralls.io/r/zerious/lighter)
-[![Dependencies](https://david-dm.org/zerious/lighter.png?theme=shields.io)](https://david-dm.org/zerious/lighter)
-[![Support](http://img.shields.io/gittip/zerious.png)](https://www.gittip.com/zerious/)
+[![Build Status](https://travis-ci.org/lighterio/lighter.png?branch=master)](https://travis-ci.org/lighterio/lighter)
+[![Code Coverage](https://coveralls.io/repos/lighterio/lighter/badge.png?branch=master)](https://coveralls.io/r/lighterio/lighter)
+[![Dependencies](https://david-dm.org/lighterio/lighter.png?theme=shields.io)](https://david-dm.org/lighterio/lighter)
+[![Support](http://img.shields.io/gittip/zerious.png)](https://www.gittip.com/lighterio/)
 
 Lighter is a lightweight Node.js framework for web applications and APIs.
 
