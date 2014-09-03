@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="en"><head><title>index</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="index"><meta name="groc-project-path" content="README.md"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path">README.md</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="lighter">Lighter</h1>
+
+<p><a href="http://badge.fury.io/js/lighter"><img src="https://badge.fury.io/js/lighter.png" alt="NPM Version" title="" /></a>
+<a href="https://travis-ci.org/lighterio/lighter"><img src="https://travis-ci.org/lighterio/lighter.png?branch=master" alt="Build Status" title="" /></a>
+<a href="https://coveralls.io/r/lighterio/lighter"><img src="https://coveralls.io/repos/lighterio/lighter/badge.png?branch=master" alt="Code Coverage" title="" /></a>
+<a href="https://david-dm.org/lighterio/lighter"><img src="https://david-dm.org/lighterio/lighter.png?theme=shields.io" alt="Dependencies" title="" /></a>
+<a href="https://www.gittip.com/lighterio/"><img src="http://img.shields.io/gittip/zerious.png" alt="Support" title="" /></a></p>
+
+<p>Lighter is a lightweight Node.js framework for web applications and APIs.</p>
+
+<h3 id="isomorphic-javascript">Isomorphic JavaScript</h3>
+
+<p>When used for web applications, Lighter will render views either on the server or the
+client.  This functionality will allow Lighter to optimize for low latency.  The first
+request to your web app renders HTML and returns it to the browser, then views are
+lazy-loaded into the client so that subsequent requests only need to return JSON that
+the client can render using its cached views.</p>
+
+<h3 id="auto-routing">Auto-routing</h3>
+
+<p>Lighter is influenced by the PHP framework CodeIgniter, in that by default, controllers
+and their methods will automagically get added to the router based on their names and
+where they are found under the controllers directory. This means you don't have to
+write a ton of routing code, and you know where to find a controller method if you
+know its URL, and vice versa.</p>
+
+<h3 id="performance">Performance</h3>
+
+<p>Lighter's default router is extremely simple so that it can respond faster than other
+frameworks such as Express, Restify and Meteor. The caveat is that dynamic paths are
+not supported by default, so you would need to do <code>/blog/article?id=1</code> rather than
+<code>/blog/article/1</code>. It's a small price to pay for amazing server throughput.</p>
+
+<h3 id="building-apis">Building APIs</h3>
+
+<p>Lighter's simplicity makes it great for APIs, and we'll be adding functionality to
+auto-generate API documentation.</p>
+
+<h2 id="getting-started">Getting started</h2>
+
+<p>To use lighter, first you must install it.</p>
+
+<pre><code class="bash.">npm i lighter
+</code></pre>
+
+<p>Using lighter is as simple as creating a lighter directory structure (as seen below)
+and then creating an <code>app.js</code> that requires lighter.</p>
+
+<pre><code class="javascript">var lighter = require('lighter');
+</code></pre>
+
+<p>Then you can run your app with Node.</p>
+
+<pre><code class="bash">node app
+</code></pre>
+
+<p>Soon, this setup process will be replaced with a CLI that will go something like:</p>
+
+<pre><code class="bash">sudo npm i -g lighter
+lighter new myapp
+cd myapp
+node app
+</code></pre>
+
+<h3 id="directory-structure">Directory structure</h3>
+
+<h4 id="assets-loaded-with-chug">Assets loaded with Chug</h4>
+
+<p>Lighter uses Chug to cache its static assets, and each type of asset comes from an
+assigned directory. Chug also loads models views and controllers. Changes inside
+those directories will trigger reloads of the items that have been changed.</p>
+
+<pre><code>/
+  controllers/
+  models/
+  public/
+  scripts/
+  styles/
+  views/
+</code></pre>
+
+<p>If you want to load assets from other directories (such as node_modules/), you can
+add to the list of locations using an API method like <code>addPublics</code>, <code>addScripts</code>,
+<code>addStyles</code> or <code>addViews</code>.</p>
+
+<h3 id="controllers">Controllers</h3>
+
+<p>Here's a sample controller that you could save into
+<code>/controllers/ContactController.js</code>:</p>
+
+<pre><code class="bash">var Controller = require('lighter/lib/Controller');
+
+module.exports = Controller.extend({
+
+  index: function GET(request, response) {
+    response.writeHead(200, {'content-type': 'text/html'});
+    response.end('TODO: Show contact info and a form.');
+  },
+
+  send: function POST(request, response) {
+    response.writeHead(200, {'content-type': 'text/html'});
+    response.end('TODO: Thank the user for contacting us.');
+  }
+
+});
+</code></pre>
+
+<p>To see the contact us form, you would visit <code>/contact</code>, and the form you submit
+would post to <code>/contact/send</code>. Once we have models, we can do more interesting
+things here.</p>
+
+<h3 id="models">Models</h3>
+
+<p>Models are coming soon...</p>
+
+<h3 id="views">Views</h3>
+
+<p>Views are rendered by name from <code>response.view</code>.</p>
+
+<p>The following would render a template that is stored at <code>/views/hello.ltl</code> with a
+context indicating who to say hello to.</p>
+
+<pre><code class="javascript">function GET(request, response) {
+  response.view('hello', {who: 'World'});
+}
+</code></pre>
+
+<h2 id="api">API</h2>
+
+<h4 id="lighteraddcontrollersarraystring-location">lighter.addControllers(Array|string location)</h4>
+
+<p>The <code>location</code> argument can be a single location or an array of locations. Lighter
+adds this location to the array of controller locations to be chugged.</p>
+
+<h4 id="lighteraddpublicsarraystring-location">lighter.addPublics(Array|string location)</h4>
+
+<p>The <code>location</code> argument can be a single location or an array of locations. Lighter
+adds this location to the array of public file locations to be chugged.</p>
+
+<h4 id="lighteraddscriptsarraystring-location">lighter.addScripts(Array|string location)</h4>
+
+<p>The <code>location</code> argument can be a single location or an array of locations. Lighter
+adds this location to the array of script file locations to be chugged.</p>
+
+<h4 id="lighteraddstylesarraystring-location">lighter.addStyles(Array|string location)</h4>
+
+<p>The <code>location</code> argument can be a single location or an array of locations. Lighter
+adds this location to the array of style file locations to be chugged.</p>
+
+<h4 id="lighteraddviewsarraystring-location">lighter.addViews(Array|string location)</h4>
+
+<p>The <code>location</code> argument can be a single location or an array of locations. Lighter
+adds this location to the array of view file locations to be chugged.</p>
+
+<h4 id="lightersetappobject-app">lighter.setApp(Object app)</h4>
+
+<p>If you would like to use Express (or another framework that exposes
+<code>app.get(path, callback)</code> etc., to do your routing, you can set Lighter to do this.</p>
+
+<h4 id="lightersetloggerobject-logger">lighter.setLogger(Object logger)</h4>
+
+<p>Set an alternative logger that exposes <code>logger.log(message)</code>.</p>
+
+<h4 id="lightersethttpportport">lighter.setHttpPort(port)</h4>
+
+<p>Set the port that you would like Lighter to use for HTTP.</p>
+
+<h4 id="lightersethttpsportport">lighter.setHttpsPort(port)</h4>
+
+<p>Set the port that you would like Lighter to use for HTTPS.</p>
+
+<h4 id="lightersetasciiartart">lighter.setAsciiArt(art)</h4>
+
+<p>Set an array of lines that you would like to be displayed upon startup.</p>
+
+<h4 id="object-lighterchug">Object lighter.chug</h4>
+
+<p>A reference to the Chug module that Lighter uses.</p>
+
+<h4 id="object-lighterbeams">Object lighter.beams</h4>
+
+<p>A reference to the Beams module that Lighter uses.</p>
+
+<h4 id="object-lightercolors">Object lighter.colors</h4>
+
+<p>A reference to the Colors module that Lighter uses.</p>
+
+<h4 id="object-lighterapp">Object lighter.app</h4>
+
+<p>A reference to the Express-like app that's been set via <code>lighter.setApp(app)</code>.</p>
+
+<h4 id="object-lighterlogger">Object lighter.logger</h4>
+
+<p>A reference to the logger that's been set via <code>lighter.setLogger(logger)</code>.</p>
+
+<h4 id="arrayobject-lighterpublics">Array|Object lighter.publics</h4>
+
+<p>The files that have been added via <code>lighter.setPublic(location)</code> or
+found in the <code>publics/</code> directory.</p>
+
+<h4 id="arrayobject-lighterscripts">Array|Object lighter.scripts</h4>
+
+<p>The scripts that have been added via <code>lighter.setPublic(location)</code> or
+found in the <code>scripts/</code> directory.</p>
+
+<h4 id="arrayobject-lighterstyles">Array|Object lighter.styles</h4>
+
+<p>The stylesheets that have been added via <code>lighter.setPublic(location)</code> or
+found in the <code>styles/</code> directory.</p>
+
+<h4 id="arrayobject-lighterviews">Array|Object lighter.views</h4>
+
+<p>The views that have been added via <code>lighter.setPublic(location)</code> or
+found in the <code>views/</code> directory.</p>
+
+<h4 id="arrayobject-lightercontrollers">Array|Object lighter.controllers</h4>
+
+<p>The controllers that have been found in the <code>controllers/</code> directory.</p>
+
+<h4 id="arrayobject-lightermodels">Array|Object lighter.models</h4>
+
+<p>The models that have been found in the <code>models/</code> directory.</p>
+
+<h4 id="lighterenv">lighter.env</h4>
+
+<p>The environment string that comes from process.env.NODE_ENV.  Expected values
+are <code>dev</code>, <code>test</code>, <code>stage</code>, <code>canary</code> or <code>prod</code>.</p></div></div></div></div></body></html>
