@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.65",
+  "version": "0.1.66",
   "main": "lighter.js",
   "bin": {
     "lighter": "commands/cli.js"
