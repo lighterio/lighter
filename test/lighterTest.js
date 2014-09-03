@@ -6,11 +6,15 @@ require('zeriousify').test();
 describe('API', function () {
 
   it('should create an app', function () {
-    var write = process.stdout.write;
+    var cwd = process.cwd();
+    mock(console, {
+      log: mock.ignore(),
+      warn: mock.ignore()
+    });
     var app = lighter({
       dir: process.cwd() + '/test/testFiles',
       logger: require('cedar')('blackhole')
     });
-    process.stdout.write = write;
+    unmock(console);
   });
 });
