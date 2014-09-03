@@ -1,4 +1,0 @@
---require exam/lib/is
---require exam/lib/mock
---reporter spec
---ui bdd
