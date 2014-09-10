@@ -1,10 +1,10 @@
 # Lighter
 
-[![NPM Version](https://badge.fury.io/js/lighter.png)](http://badge.fury.io/js/lighter)
-[![Build Status](https://travis-ci.org/lighterio/lighter.png?branch=master)](https://travis-ci.org/lighterio/lighter)
-[![Code Coverage](https://coveralls.io/repos/lighterio/lighter/badge.png?branch=master)](https://coveralls.io/r/lighterio/lighter)
-[![Dependencies](https://david-dm.org/lighterio/lighter.png?theme=shields.io)](https://david-dm.org/lighterio/lighter)
-[![Support](http://img.shields.io/gittip/zerious.png)](https://www.gittip.com/lighterio/)
+[![NPM Version](https://img.shields.io/npm/v/lighter.svg) ![Downloads](https://img.shields.io/npm/dm/lighter.svg)](https://npmjs.org/package/lighter)
+[![Build Status](https://img.shields.io/travis/lighterio/lighter.svg)](https://travis-ci.org/lighterio/lighter)
+[![Code Coverage](https://img.shields.io/coveralls/lighterio/lighter/master.svg)](https://coveralls.io/r/lighterio/lighter)
+[![Dependencies](https://img.shields.io/david/lighterio/lighter.svg)](https://david-dm.org/lighterio/lighter)
+[![Support](https://img.shields.io/gratipay/Lighter.io.svg)](https://gratipay.com/Lighter.io/)
 
 Lighter is a lightweight Node.js framework for web applications and APIs.
 
