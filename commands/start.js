@@ -16,10 +16,7 @@ module.exports = function (env) {
    * Get a string of numberless ordered lines for deduping logs.
    */
   function munge(text) {
-    if(!text) {
-      return;
-    }
-    var lines = text.split('\n');
+    var lines = ('' + text).split('\n');
     lines.forEach(function (line, index) {
       lines[index] = lines[index].replace(/\d+/, '');
     });
