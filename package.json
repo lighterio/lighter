@@ -11,7 +11,7 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.67",
+  "version": "0.1.68",
   "main": "lighter.js",
   "bin": {
     "lighter": "commands/cli.js"
@@ -43,7 +43,7 @@
     "jymin": "^0.3.5",
     "ltl": "^0.1.14",
     "mc": "^1.0.6",
-    "ormy": "^0.1.4",
+    "ormy": "^0.2.0",
     "shellify": "^0.0.4",
     "splode": "^0.0.2",
     "za": "^0.0.21"
