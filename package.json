@@ -11,16 +11,14 @@
     "express",
     "alternative"
   ],
-  "version": "0.1.68",
+  "version": "0.1.69",
   "main": "lighter.js",
   "bin": {
     "lighter": "commands/cli.js"
   },
   "homepage": "http://lighter.io/lighter",
-  "repository": "git://github.com/lighterio/lighter.git",
-  "bugs": {
-    "url": "http://github.com/lighterio/lighter/issues"
-  },
+  "repository": "https://github.com/lighterio/lighter.git",
+  "bugs": "https://github.com/lighterio/lighter/issues",
   "author": "Sam Eubank <sameubank@gmail.com>",
   "contributors": [
     "Sam Eubank <sameubank@gmail.com>"
@@ -37,13 +35,13 @@
   },
   "dependencies": {
     "beams": "^0.0.16",
-    "cedar": "^0.0.17",
+    "cedar": "^0.0.19",
     "chug": "^0.2.0",
     "d6": "^0.1.7",
     "jymin": "^0.3.5",
     "ltl": "^0.1.14",
     "mc": "^1.0.6",
-    "ormy": "^0.2.0",
+    "ormy": "^0.2.1",
     "shellify": "^0.0.4",
     "splode": "^0.0.2",
     "za": "^0.0.21"
@@ -55,10 +53,5 @@
     "express": "4.9.0",
     "zeriousify": "^0.1.9"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://github.com/lighterio/lighter/blob/master/MIT-LICENSE.md"
-    }
-  ]
+  "license": "MIT"
 }
