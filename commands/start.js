@@ -1,13 +1,12 @@
-var shellify = require('shellify');
 var spawn = require('child_process').spawn;
-var Duplex = require('stream').Duplex;
-var util = require('util');
 
 // TODO: Make these thresholds configurable.
 var RESTART_TIME = 500; // Try to restart in half a second.
 var OK_TIME = 1e3; // Call a restart "ok" after 2 seconds without failing.
 
 module.exports = function (env) {
+
+  process.env.NODE_ENV = env;
 
   var previousStart = new Date(0);
   var failureOutput;
@@ -38,7 +37,11 @@ module.exports = function (env) {
     var isCleanStart = elapsed > OK_TIME;
 
     // Spawn a child process and make it output to stdout.
-    var child = spawn(process.execPath, ['app'], {env: {NODE_ENV: env}});
+    var appPath = process.env.LIGHTER_APP || 'app';
+    var child = spawn(process.execPath, [appPath], {
+      cwd: process.env.LIGHTER_DIR || process.cwd(),
+      env: process.env
+    });
 
     var pipeToStdout = function () {
       child.stdout.pipe(process.stdout);
