@@ -1,45 +1,14 @@
 {
   "name": "lighter",
+  "version": "0.1.70",
   "description": "A lightweight Node.js framework",
-  "keywords": [
-    "lighter",
-    "isomorphic",
-    "mvc",
-    "http",
-    "https",
-    "router",
-    "express",
-    "alternative"
-  ],
-  "version": "0.1.69",
-  "main": "lighter.js",
-  "bin": {
-    "lighter": "commands/cli.js"
-  },
-  "homepage": "http://lighter.io/lighter",
-  "repository": "https://github.com/lighterio/lighter.git",
-  "bugs": "https://github.com/lighterio/lighter/issues",
-  "author": "Sam Eubank <sameubank@gmail.com>",
-  "contributors": [
-    "Sam Eubank <sameubank@gmail.com>"
-  ],
-  "engines": [
-    "node >= 0.2.6"
-  ],
-  "scripts": {
-    "test": "./node_modules/exam/exam.js",
-    "retest": "./node_modules/exam/exam.js --watch",
-    "cover": "istanbul cover ./node_modules/exam/exam.js",
-    "report": "open coverage/lcov-report/index.html",
-    "coveralls": "istanbul cover ./node_modules/exam/exam.js --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
-  },
   "dependencies": {
     "beams": "^0.0.16",
     "cedar": "^0.0.19",
     "chug": "^0.2.0",
     "d6": "^0.1.7",
     "jymin": "^0.3.5",
-    "ltl": "^0.1.14",
+    "ltl": "^0.1.15",
     "mc": "^1.0.6",
     "ormy": "^0.2.1",
     "shellify": "^0.0.4",
@@ -51,7 +20,37 @@
     "istanbul": "0.3.2",
     "coveralls": "2.11.1",
     "express": "4.9.0",
-    "zeriousify": "^0.1.9"
+    "zeriousify": "^0.1.10"
   },
+  "keywords": [
+    "lighter",
+    "isomorphic",
+    "mvc",
+    "http",
+    "https",
+    "router",
+    "express",
+    "alternative"
+  ],
+  "main": "lighter.js",
+  "bin": {
+    "lighter": "commands/cli.js"
+  },
+  "engines": {
+    "node": ">=0.2.6"
+  },
+  "scripts": {
+    "test": "./node_modules/exam/exam.js",
+    "cover": "istanbul cover ./node_modules/exam/exam.js",
+    "report": "open coverage/lcov-report/index.html",
+    "coveralls": "istanbul cover ./node_modules/exam/exam.js --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+  },
+  "repository": "https://github.com/lighterio/lighter.git",
+  "bugs": "https://github.com/lighterio/lighter/issues",
+  "homepage": "http://lighter.io/lighter",
+  "author": "Sam Eubank <sameubank@gmail.com>",
+  "contributors": [
+    "Sam Eubank <sameubank@gmail.com>"
+  ],
   "license": "MIT"
 }
