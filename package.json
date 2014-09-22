@@ -1,6 +1,6 @@
 {
   "name": "lighter",
-  "version": "0.1.70",
+  "version": "0.1.71",
   "description": "A lightweight Node.js framework",
   "dependencies": {
     "beams": "^0.0.16",
