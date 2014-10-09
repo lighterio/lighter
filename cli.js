@@ -1,1 +1,0 @@
-/Users/sam/Workspace/lighter/commands/cli.js

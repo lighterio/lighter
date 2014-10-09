@@ -10,13 +10,13 @@
     "jymin": "^0.3.5",
     "ltl": "^0.1.15",
     "mc": "^1.0.6",
-    "ormy": "^0.2.1",
+    "ormy": "^0.2.2",
     "shellify": "^0.0.4",
     "splode": "^0.0.2",
     "za": "^0.0.21"
   },
   "devDependencies": {
-    "exam": "^0.0.7",
+    "exam": "^0.0.8",
     "istanbul": "0.3.2",
     "coveralls": "2.11.1",
     "express": "4.9.0",
@@ -34,7 +34,7 @@
   ],
   "main": "lighter.js",
   "bin": {
-    "lighter": "commands/cli.js"
+    "lighter": "lighter.js"
   },
   "engines": {
     "node": ">=0.2.6"
