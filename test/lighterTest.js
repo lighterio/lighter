@@ -13,8 +13,9 @@ describe('API', function () {
     });
     var app = lighter({
       dir: process.cwd() + '/test/testFiles',
-      logger: require('cedar')('blackhole')
+      logger: ['blackhole'],
+      enableCluster: false
     });
-    unmock(console);
   });
+
 });

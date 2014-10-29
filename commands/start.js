@@ -64,10 +64,12 @@ module.exports = function (env) {
 
       // When we've started ok, write output to stdout and start piping.
       var okTimer = setTimeout(function () {
-        process.stdout.write(output);
-        pipeToStdout();
-        child.stdout.removeListener('output', append);
-        child.stderr.removeListener('output', append);
+        if (output) {
+          process.stdout.write(output);
+          pipeToStdout();
+          child.stdout.removeListener('output', append);
+          child.stderr.removeListener('output', append);
+        }
         output = '';
       }, OK_TIME);
     }
@@ -77,16 +79,30 @@ module.exports = function (env) {
 
       // If we failed differently, log the new output.
       if (failureOutput && (munge(output) != munge(failureOutput))) {
-        process.stdout.write(output);
+        write(output);
       }
       // If we failed the same way, just show another red dot.
       else {
-        process.stdout.write('\u001b[31m.\u001b[39m');
+        write('\u001b[31m.\u001b[39m');
       }
       failureOutput = output;
       clearTimeout(okTimer);
       setTimeout(start, RESTART_TIME);
     });
+  }
+
+  /**
+   * Try writing to `stdout`, and ignore failures.
+   */
+  function write(data) {
+    try {
+      if (data) {
+        process.stdout.write(data);
+      }
+    }
+    catch (e) {
+      // TODO: Debug "TypeError: invalid data" at WriteStream.Socket.write
+    }
   }
 
   start();
