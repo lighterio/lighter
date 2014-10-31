@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+var dir = __dirname;
+
 /**
  * When running directly, start the Lighter CLI.
  * The CLI can be used to
@@ -22,8 +24,8 @@ if (process.mainModule == module) {
   });
 
   // Run the CLI with `shellify`.
-  require('shellify')({
-    root: __dirname,
+  require(dir + '/node_modules/shellify/shellify.js')({
+    root: dir,
     commands: commands
   });
 }
@@ -33,7 +35,7 @@ if (process.mainModule == module) {
  * Expose a function that starts a Lighter server.
  */
 var lighter = module.exports = function (options) {
-  var App = require('./lib/App');
+  var App = require(dir + '/lib/App.js');
   return new App(options);
 };
 
@@ -42,6 +44,6 @@ var lighter = module.exports = function (options) {
  */
 Object.defineProperty(lighter, 'version', {
   get: function () {
-    return require('./package.json').version;
+    return require(dir + '/package.json').version;
   }
 });
