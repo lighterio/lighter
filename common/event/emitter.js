@@ -43,8 +43,12 @@ var Emitter = module.exports = Type.extend({
       events[type] = [listeners, fn];
     }
     // When it's already an Array, just push.
-    else {
+    else if (listeners.length < self.maxListeners) {
       listeners.push(fn);
+    }
+    // TODO: throw.
+    else {
+      throw new Error('Max listeners exceeded');
     }
     return self;
   },
