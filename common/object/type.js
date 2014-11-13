@@ -3,7 +3,7 @@
  * with an `init` method.
  *
  * @origin lighter-common/common/object/type.js
- * @version 0.0.2
+ * @version 0.0.1
  */
 
 // The default constructor does nothing.

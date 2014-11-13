@@ -1,30 +1,38 @@
 /**
  * Emitter is a lightweight event emitter object with an API similar
- * to Node.js's EventEmitter.
+ * to Node's EventEmitter.
  *
  * - `emitter.addListener` is not available. Use `emitter.on` instead (and
- *    save a few characters)
+ *   save a few characters)
  *
- * - `emitter.setMaxListeners` is not available. Please ensure that you do not
- *   leak memory or hurt performance by adding too many listeners.
+ * - `emitter.on` throws an error if there are too many listeners, whereas,
+ *   Node would log to the console.
  *
  * - `emitter._events` doesn't exist until you've added listeners, and it is
  *   deleted if you remove all listeners.
  *
  * @origin lighter-common/common/events/emitter.js
- * @version 0.0.3
+ * @version 0.0.4
  */
 
 var Type = require('../object/type');
 var Emitter = module.exports = Type.extend({
 
   /**
-   * Set the maximum number of listeners that can be.
+   * Set the maximum number of listeners that can listen to any type of event.
    */
-  setMaxListeners: function (n) {
+  setMaxListeners: function (max) {
     var self = this;
-    self.maxListeners = n;
+    self._maxListeners = max ? max : Infinity;
     return self;
+  },
+
+  /**
+   * Handle the case of max listeners being exceeded for an event type.
+   */
+  maxListenersExceeded: function (type) {
+    var max = self._maxListeners || Emitter.defaultMaxListeners;
+    throw new Error('Max ' + max + ' listeners exceeded for "' + type + '".');
   },
 
   /**
@@ -34,21 +42,28 @@ var Emitter = module.exports = Type.extend({
     var self = this;
     var events = self._events = self._events || {};
     var listeners = events[type];
+    var max = self._maxListeners || Emitter.defaultMaxListeners;
     // If there's only one, don't waste an Array.
     if (!listeners) {
       events[type] = fn;
     }
-    // When there's more than one, start an Array.
+    // When there's more than one, start an Array unless the max is 1.
     else if (typeof listeners == 'function') {
-      events[type] = [listeners, fn];
+      if (max > 1) {
+        events[type] = [listeners, fn];
+      }
+      else {
+        self.maxListenersExceeded(type);
+      }
     }
-    // When it's already an Array, just push.
-    else if (listeners.length < self.maxListeners) {
-      listeners.push(fn);
-    }
-    // TODO: throw.
+    // When it's already an Array, push unless we've exceeded the max.
     else {
-      throw new Error('Max listeners exceeded');
+      if (listeners.length < max) {
+        listeners.push(fn);
+      }
+      else {
+        self.maxListenersExceeded(type);
+      }
     }
     return self;
   },
@@ -158,3 +173,6 @@ var Emitter = module.exports = Type.extend({
   }
 
 });
+
+// Same default as native EventEmitter.
+Emitter.defaultMaxListeners = 10;
