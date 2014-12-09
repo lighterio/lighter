@@ -13,6 +13,7 @@
  *
  * @origin lighter-common/common/events/emitter.js
  * @version 0.0.4
+ * @import object/type
  */
 
 var Type = require('../object/type');
@@ -31,6 +32,7 @@ var Emitter = module.exports = Type.extend({
    * Handle the case of max listeners being exceeded for an event type.
    */
   maxListenersExceeded: function (type) {
+    var self = this;
     var max = self._maxListeners || Emitter.defaultMaxListeners;
     throw new Error('Max ' + max + ' listeners exceeded for "' + type + '".');
   },

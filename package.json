@@ -4,23 +4,22 @@
   "description": "A lightweight Node.js framework",
   "dependencies": {
     "beams": "^0.1.0",
-    "cedar": "^0.1.3",
-    "chug": "^0.2.2",
-    "d6": "^0.1.8",
+    "cedar": "^0.0.0",
+    "chug": "^0.3.0",
+    "d6": "^0.2.0",
     "jymin": "^0.4.0",
     "ltl": "^0.1.15",
     "mc": "^1.0.6",
     "ormy": "^0.3.0",
     "shellify": "^0.0.5",
     "splode": "^0.0.2",
-    "za": "^0.1.1"
+    "za": "^0.2.0"
   },
   "devDependencies": {
-    "exam": "^0.1.6",
+    "exam": "^0.2.0",
     "istanbul": "0.3.2",
     "coveralls": "2.11.1",
-    "express": "4.9.0",
-    "zeriousify": "^0.1.12"
+    "express": "4.9.0"
   },
   "keywords": [
     "lighter",

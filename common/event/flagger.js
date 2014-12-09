@@ -4,7 +4,8 @@
  * or listen for a change if it doesn't.
  *
  * @origin lighter-common/common/events/flagger.js
- * @version 0.0.2
+ * @version 0.0.3
+ * @import event/emitter
  */
 
 var Emitter = require('../event/emitter');
@@ -28,7 +29,7 @@ var Flagger = module.exports = Emitter.extend({
     }
     if (flags[flag] !== value) {
       flags[flag] = value;
-      self.emit(flag);
+      self.emit(flag, value);
       self.emit(flag + ':' + value);
     }
     return self;

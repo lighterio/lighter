@@ -1,3 +1,3 @@
 module.exports = function () {
-  require('./start')('new');
+  console.log('TODO: Create a script to make a new Lighter App.');
 };
