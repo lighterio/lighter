@@ -6,7 +6,7 @@
  * @version 0.0.1
  */
 
-var scriptify = JSON.scriptify = function (value, stack) {
+var scriptify = module.exports = JSON.scriptify = function (value, stack) {
   var type = typeof value;
   if (type == 'function') {
     return value.toString();

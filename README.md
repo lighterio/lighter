@@ -7,8 +7,6 @@
 [![Support](https://img.shields.io/gratipay/Lighter.io.svg)](https://gratipay.com/Lighter.io/)
 
 
-## TL;DR
-
 Lighter is a lightweight Node.js framework for web applications and APIs.
 
 ### Isomorphic JavaScript

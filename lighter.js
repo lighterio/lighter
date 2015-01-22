@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 if (process.mainModule == module) {
   require(__dirname + '/common/process/cli')({
     aliases: {
@@ -11,7 +12,11 @@ if (process.mainModule == module) {
       p: 'prod'
     }
   });
+  return;
 }
+
+// Set up colors for custom ASCII art.
+require(__dirname + '/common/string/colors');
 
 /**
  * Expose a function that starts a Lighter server.

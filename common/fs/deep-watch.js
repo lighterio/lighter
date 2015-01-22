@@ -4,7 +4,7 @@
  * Watch for changes on all directories under a given directory.
  *
  * @origin lighter-common/common/fs/deep-watch.js
- * @version 0.0.1
+ * @version 0.0.2
  * @import event/emitter
  */
 
@@ -32,7 +32,7 @@ var deepWatch = module.exports = function (dir, options) {
 
 // Remember options and watched files.
 var dir;
-var ignoreDir = /\/(logs?|\.[^\/]+)$/;
+var ignoreDir = /\/(logs?|data|\.[^\/]+)$/;
 var ignoreFile = /\/(\.subl[\w\d]+\.tmp|[^\/]+\.swp)$/;
 var maxFsWatches;
 var maxListSize;

@@ -11,7 +11,7 @@ describe('API', function () {
     var App = lighter({
       dir: process.cwd() + '/test/test-files',
       logger: ['blackhole'],
-      enableCluster: false
+      processCount: 1
     });
   });
 
