@@ -1,12 +1,40 @@
+/**
+ * Spawn an App in a child process, and restart the child process on close.
+ */
 var spawn = require('child_process').spawn;
+var watch = require('../common/fs/deep-watch');
+require('../common/json/write-stream');
 
 // TODO: Make these thresholds configurable.
 var RESTART_TIME = 500; // Try to restart in half a second.
 var OK_TIME = 1e3; // Call a restart "ok" after 2 seconds without failing.
 
+// Keep a reference to the child process.
+var child;
+
 module.exports = function (env) {
 
+  // Spawn a child process and make it output to stdout.
+  var appPath = process.env.LIGHTER_APP || 'app';
+
+  // Allow the directory and environment to be fed into the command.
+  var dir = process.env.LIGHTER_DIR || process.cwd();
   process.env.NODE_ENV = env;
+
+  if (/^(dev|debug)/.test(env)) {
+    var watcher = watch(dir, {
+      maxListSize: 1e4,
+      notifyInterval: 1
+    });
+    watcher.on('change', function (path) {
+      if (child) {
+        child.stdin.write({
+          type: 'change',
+          path: path
+        });
+      }
+    });
+  }
 
   var previousStart = new Date(0);
   var failureOutput;
@@ -36,10 +64,8 @@ module.exports = function (env) {
     // If it's been a while since we restarted, call this a clean start.
     var isCleanStart = elapsed > OK_TIME;
 
-    // Spawn a child process and make it output to stdout.
-    var appPath = process.env.LIGHTER_APP || 'app';
-    var child = spawn(process.execPath, [appPath], {
-      cwd: process.env.LIGHTER_DIR || process.cwd(),
+    child = spawn(process.execPath, [appPath], {
+      cwd: dir,
       env: process.env
     });
 
@@ -74,8 +100,14 @@ module.exports = function (env) {
       }, OK_TIME);
     }
 
-    // When a child process dies, try to restart it.
+    // Set the child's stdin to accept objects.
+    JSON.writeStream(child.stdin);
+
+    // When a child process dies, restart it.
     child.on('close', function () {
+
+      // Dereference the child.
+      child = undefined;
 
       // If we failed differently, log the new output.
       if (failureOutput && (munge(output) != munge(failureOutput))) {

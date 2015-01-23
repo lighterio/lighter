@@ -1,7 +1,4 @@
 var lighter = require('../lighter');
-var chug = require('chug');
-require('zeriousify').test();
-
 
 describe('API', function () {
 
@@ -11,10 +8,10 @@ describe('API', function () {
       log: mock.ignore(),
       warn: mock.ignore()
     });
-    var app = lighter({
-      dir: process.cwd() + '/test/testFiles',
+    var App = lighter({
+      dir: process.cwd() + '/test/test-files',
       logger: ['blackhole'],
-      enableCluster: false
+      processCount: 1
     });
   });
 

@@ -1,4 +1,4 @@
-var Controller = require('../../../lib/Controller');
+var Controller = require('../../../lib/controller');
 
 module.exports = Controller.extend({
 

@@ -1,41 +1,28 @@
 #!/usr/bin/env node
 
-var dir = __dirname;
-
-/**
- * When running directly, start the Lighter CLI.
- * The CLI can be used to
- */
 if (process.mainModule == module) {
-
-  // The Lighter CLI accepts a set of commands.
-  var commands = {};
-
-  // Each environment has its own command.
-  // For example: `lighter dev` starts Lighter in development mode.
-  var envs = ['debug', 'dev', 'test', 'stage', 'beta', 'new', 'canary', 'prod'];
-  var aliases = {};
-  envs.forEach(function (env) {
-    commands[env] = {
-      note: 'Starts the app as a "' + env + '" environment.',
-      options: {},
-      alias: env == 'debug' ? 'e' : env[0]
-    };
+  require(__dirname + '/common/process/cli')({
+    aliases: {
+      n: 'new',
+      d: 'debug',
+      v: 'dev',
+      s: 'stage',
+      t: 'test',
+      c: 'canary',
+      p: 'prod'
+    }
   });
-
-  // Run the CLI with `shellify`.
-  require(dir + '/node_modules/shellify/shellify.js')({
-    root: dir,
-    commands: commands
-  });
+  return;
 }
 
+// Set up colors for custom ASCII art.
+require(__dirname + '/common/string/colors');
 
 /**
  * Expose a function that starts a Lighter server.
  */
 var lighter = module.exports = function (options) {
-  var App = require(dir + '/lib/App.js');
+  var App = require(__dirname + '/lib/app');
   return new App(options);
 };
 
@@ -44,6 +31,6 @@ var lighter = module.exports = function (options) {
  */
 Object.defineProperty(lighter, 'version', {
   get: function () {
-    return require(dir + '/package.json').version;
+    return require(__dirname + '/package.json').version;
   }
 });
