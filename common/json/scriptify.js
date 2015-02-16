@@ -2,8 +2,8 @@
  * Convert an object to non-strict JSON, complete with JS code
  * for re-constructing Date, Error, Function and RegExp values.
  *
- * @origin lighter-common/common/json/scriptify.js
- * @version 0.0.1
+ * @origin https://github.com/lighterio/lighter-common/common/json/scriptify.js
+ * @version 0.0.2
  */
 
 var scriptify = module.exports = JSON.scriptify = function (value, stack) {
@@ -49,7 +49,7 @@ var scriptify = module.exports = JSON.scriptify = function (value, stack) {
       return string + ']';
     }
     else {
-      var i = 0;
+      i = 0;
       string = '{';
       for (var key in value) {
         string += (i ? ',' : '') +

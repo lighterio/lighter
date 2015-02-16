@@ -1,7 +1,7 @@
 /**
- * Add non-enumerable config, app, and logger properties to an object.
+ * Add non-enumerable config, app, and log properties to an object.
  *
- * @origin lighter-common/common/object/configure.js
+ * @origin https://github.com/lighterio/lighter-common/common/object/configure.js
  * @version 0.0.1
  */
 var configure = module.exports = function (object) {
@@ -9,10 +9,10 @@ var configure = module.exports = function (object) {
   for (var i = 1, n = arguments.length; i < n; i++) {
     var config = arguments[i] || NOTHING;
     var app = config.app || NOTHING;
-    var logger = config.logger || app.logger || NOTHING;
+    var log = config.log || app.log || NOTHING;
     define(object, 'config', config);
     define(object, 'app', app);
-    define(object, 'logger', logger);
+    define(object, 'log', log);
   }
   return object;
 };

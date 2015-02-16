@@ -10,7 +10,7 @@ describe('API', function () {
     });
     var App = lighter({
       dir: process.cwd() + '/test/test-files',
-      logger: ['blackhole'],
+      log: ['blackhole'],
       processCount: 1
     });
   });

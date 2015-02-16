@@ -1,6 +1,6 @@
 #!/usr/bin/env iojs
 
-require(__dirname + '/common/process/cli')({
+require('./common/process/cli')({
   aliases: {
     n: 'new',
     d: 'debug',

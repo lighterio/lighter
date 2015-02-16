@@ -1,7 +1,7 @@
 /**
  * Construct a command line interface with options, and potentially multiple commands.
  *
- * @origin lighter-common/common/process/cli.js
+ * @origin https://github.com/lighterio/lighter-common/common/process/cli.js
  * @version 0.0.1
  * @import string/colors
  * @import fs/shorten-path

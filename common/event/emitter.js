@@ -11,7 +11,7 @@
  * - `emitter._events` doesn't exist until you've added listeners, and it is
  *   deleted if you remove all listeners.
  *
- * @origin lighter-common/common/events/emitter.js
+ * @origin https://github.com/lighterio/lighter-common/common/events/emitter.js
  * @version 0.0.5
  * @import object/type
  */

@@ -1,0 +1,22 @@
+{
+  "indent": 2,
+  "strict": false,
+  "camelcase": true,
+  "browser": true,
+  "node": true,
+  "globals": {
+    "describe": false,
+    "ddescribe": false,
+    "it": false,
+    "iit": false,
+    "before": false,
+    "beforeEach": false,
+    "after": false,
+    "afterEach": false,
+    "is": false,
+    "mock": false,
+    "unmock": false,
+    "bench": false,
+    "exam": false
+  }
+}

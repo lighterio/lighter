@@ -1,30 +1,30 @@
 #!/usr/bin/env node
 
 if (process.mainModule == module) {
-  require(__dirname + '/common/process/cli')({
+  require('./common/process/cli')({
     aliases: {
       n: 'new',
-      d: 'debug',
-      v: 'dev',
-      s: 'stage',
-      t: 'test',
-      c: 'canary',
-      p: 'prod'
+      d: 'debug', v: 'dev',
+      t: 'test', s: 'stage',
+      c: 'canary', p: 'prod'
     }
   });
   return;
 }
 
-// Set up colors for custom ASCII art.
 require(__dirname + '/common/string/colors');
 
 /**
- * Expose a function that starts a Lighter server.
+ * Lighter exports an App factory function.
  */
 var lighter = module.exports = function (options) {
-  var App = require(__dirname + '/lib/app');
-  return new App(options);
+  return new lighter.App(options);
 };
+
+/**
+ * Expose Lighter's App type for instantiating apps.
+ */
+lighter.App = require(__dirname + '/lib/app');
 
 /**
  * Expose the Lighter version via package.json lazy loading.
@@ -34,3 +34,17 @@ Object.defineProperty(lighter, 'version', {
     return require(__dirname + '/package.json').version;
   }
 });
+
+/**
+ * Do nothing.
+ */
+lighter.no = function () {
+};
+
+/**
+ * Do something.
+ * @param {Function} fn  Something to do.
+ */
+lighter.go = function (fn) {
+  fn.call(this);
+};

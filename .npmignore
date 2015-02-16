@@ -21,3 +21,5 @@ node_modules
 pids
 results
 test
+.editorconfig
+.jshintrc

@@ -3,7 +3,7 @@
  * listener functions immediately if a flag already has the target value,
  * or listen for a change if it doesn't.
  *
- * @origin lighter-common/common/events/flagger.js
+ * @origin https://github.com/lighterio/lighter-common/common/events/flagger.js
  * @version 0.0.3
  * @import event/emitter
  */

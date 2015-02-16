@@ -5,6 +5,8 @@
   "browser": true,
   "node": true,
   "quotmark": false,
-  "loopfunc": true
+  "loopfunc": true,
+  "globals": {
+    "Jymin": true
+  }
 }
-

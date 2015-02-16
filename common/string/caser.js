@@ -11,7 +11,7 @@
  * - "private" case `_looksLikeThis`.
  * - "shrinker" case `_LOOKS_LIKE_THIS`.
  *
- * @origin lighter-common/common/string/caser.js
+ * @origin https://github.com/lighterio/lighter-common/common/string/caser.js
  * @version 0.0.1
  */
 

@@ -3,7 +3,7 @@
 /**
  * Watch for changes on all directories under a given directory.
  *
- * @origin lighter-common/common/fs/deep-watch.js
+ * @origin https://github.com/lighterio/lighter-common/common/fs/deep-watch.js
  * @version 0.0.2
  * @import event/emitter
  */

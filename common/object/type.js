@@ -2,7 +2,7 @@
  * A Type is an extendable object whose instances can be constructed
  * with an `init` method.
  *
- * @origin lighter-common/common/object/type.js
+ * @origin https://github.com/lighterio/lighter-common/common/object/type.js
  * @version 0.0.1
  */
 

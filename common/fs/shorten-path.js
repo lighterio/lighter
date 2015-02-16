@@ -2,7 +2,7 @@
  * Allow paths to be shortened with "./" and "~/" where appropriate.
  * // TODO: Detect when "../" can be used.
  *
- * @origin lighter-common/common/fs/shorten-path.js
+ * @origin https://github.com/lighterio/lighter-common/common/fs/shorten-path.js
  * @version 0.0.1
  */
 

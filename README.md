@@ -51,6 +51,14 @@ and then creating an `app.js` that requires lighter.
 
 ```javascript
 var lighter = require('lighter');
+
+var app = lighter({
+
+  initJymin: lighter.no,
+
+  initD6: lighter.no
+
+});
 ```
 
 Then you can run your app with Node.
@@ -124,7 +132,7 @@ Models are coming soon...
 Views are rendered by name from `response.view`.
 
 The following would render a template that is stored at `/views/hello.ltl` with a
-context indicating who to say hello to.
+state indicating who to say hello to.
 ```javascript
 function GET(request, response) {
   response.view('hello', {who: 'World'});
@@ -158,8 +166,8 @@ adds this location to the array of view file locations to be chugged.
 If you would like to use Express (or another framework that exposes
 `app.get(path, callback)` etc., to do your routing, you can set Lighter to do this.
 
-#### lighter.setLogger(Object logger)
-Set an alternative logger that exposes `logger.log(message)`.
+#### lighter.setLog(Object log)
+Set an alternative log that exposes `log.log(message)`.
 
 #### lighter.setHttpPort(port)
 Set the port that you would like Lighter to use for HTTP.
@@ -182,8 +190,8 @@ A reference to the Colors module that Lighter uses.
 #### Object lighter.app
 A reference to the Express-like app that's been set via `lighter.setApp(app)`.
 
-#### Object lighter.logger
-A reference to the logger that's been set via `lighter.setLogger(logger)`.
+#### Object lighter.log
+A reference to the log that's been set via `lighter.setLog(log)`.
 
 #### Array|Object lighter.publics
 The files that have been added via `lighter.setPublic(location)` or

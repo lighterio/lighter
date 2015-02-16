@@ -1,7 +1,7 @@
 /**
  * Extend the String prototype with terminal color methods.
  *
- * @origin lighter-common/common/string/colors.js
+ * @origin https://github.com/lighterio/lighter-common/common/string/colors.js
  * @version 0.0.3
  */
 
