@@ -36,6 +36,12 @@ Object.defineProperty(lighter, 'version', {
 });
 
 /**
+ * Expose Lighter's location on disk.
+ */
+lighter.dir = __dirname;
+
+
+/**
  * Do nothing.
  */
 lighter.no = function () {

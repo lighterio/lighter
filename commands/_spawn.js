@@ -64,7 +64,11 @@ module.exports = function (env) {
     // If it's been a while since we restarted, call this a clean start.
     var isCleanStart = elapsed > OK_TIME;
 
-    child = spawn(process.execPath, [appPath], {
+    // Pass arguments to spawned processes.
+    var args = process.argv.slice(3);
+    args.unshift(appPath);
+
+    child = spawn(process.execPath, args, {
       cwd: dir,
       env: process.env
     });

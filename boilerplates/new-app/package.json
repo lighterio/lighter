@@ -1,0 +1,53 @@
+{
+  "name": "lighter",
+  "version": "0.3.0",
+  "description": "A lightweight Node.js framework",
+  "dependencies": {
+    "beams": "^0.1.1",
+    "cedar": "^0.2.0",
+    "chug": "^0.3.1",
+    "d6": "^0.2.1",
+    "jymin": "^0.4.1",
+    "ltl": "^0.2.0",
+    "mc": "^1.0.6",
+    "ormy": "^0.3.0",
+    "splode": "^0.1.0",
+    "za": "^0.2.0"
+  },
+  "devDependencies": {
+    "exam": "^0.2.2",
+    "express": "4.9.0"
+  },
+  "keywords": [
+    "lighter",
+    "isomorphic",
+    "mvc",
+    "http",
+    "https",
+    "router",
+    "express",
+    "alternative"
+  ],
+  "main": "lighter.js",
+  "bin": {
+    "lighter": "lighter.js",
+    "lighter-iojs": "lighter-iojs.js"
+  },
+  "engines": {
+    "node": ">=0.2.6"
+  },
+  "scripts": {
+    "test": "./node_modules/exam/exam.js",
+    "cover": "./node_modules/exam/exam-cover.js",
+    "report": "open coverage/lcov-report/index.html",
+    "coveralls": "./node_modules/exam/exam-coveralls.js"
+  },
+  "repository": "https://github.com/lighterio/lighter.git",
+  "bugs": "https://github.com/lighterio/lighter/issues",
+  "homepage": "http://lighter.io/lighter",
+  "author": "Sam Eubank <sameubank@gmail.com>",
+  "contributors": [
+    "Sam Eubank <sameubank@gmail.com>"
+  ],
+  "license": "MIT"
+}
