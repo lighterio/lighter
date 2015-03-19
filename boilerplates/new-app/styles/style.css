@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+body, html {
+  background: #ccc;
+}
+
+body {
+  border-top: 0.4em solid #e50;
+  color: #000;
+  height: 100%;
+}
+
+a {
+  color: #24a;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #e50;
+}
+
+h1, h2, h3, h4 {
+  color: #048;
+}
+
+._hidden {
+  display: none;
+}
+
+img {
+  border: 0;
+}

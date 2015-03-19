@@ -2,8 +2,12 @@
  * Convert an object to non-strict JSON, complete with JS code
  * for re-constructing Date, Error, Function and RegExp values.
  *
+ * The JSON.scriptify method also has options, attached as properties:
+ * - scriptify.ownPropertiesOnly: false
+ * - scriptify.maxDepth: 5
+ *
  * @origin https://github.com/lighterio/lighter-common/common/json/scriptify.js
- * @version 0.0.2
+ * @version 0.0.3
  */
 
 var scriptify = module.exports = JSON.scriptify = function (value, stack) {
@@ -39,7 +43,10 @@ var scriptify = module.exports = JSON.scriptify = function (value, stack) {
     }
     (stack = stack || []).push(value);
     var string;
-    if (value instanceof Array) {
+    if (stack.length > scriptify.maxDepth) {
+      value = (value instanceof Array) ? '"[Array]"' : '"[Object]"';
+    }
+    else if (value instanceof Array) {
       string = '[';
       length = value.length;
       for (i = 0; i < length; i++) {
@@ -52,10 +59,12 @@ var scriptify = module.exports = JSON.scriptify = function (value, stack) {
       i = 0;
       string = '{';
       for (var key in value) {
-        string += (i ? ',' : '') +
-          (/^[$_a-z][\w$]*$/i.test(key) ? key : '"' + key + '"') +
-          ':' + scriptify(value[key], stack);
-        i++;
+        if (scriptify.ownPropertiesOnly || value.hasOwnProperty(key)) {
+          string += (i ? ',' : '') +
+            (/^[$_a-z][\w$]*$/i.test(key) ? key : '"' + key + '"') +
+            ':' + scriptify(value[key], stack);
+          i++;
+        }
       }
       stack.pop();
       return string + '}';
@@ -63,3 +72,6 @@ var scriptify = module.exports = JSON.scriptify = function (value, stack) {
   }
   return '' + value;
 };
+
+scriptify.maxDepth = 5;
+scriptify.ownPropertiesOnly = false;
