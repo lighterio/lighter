@@ -1,6 +1,6 @@
 {
   "name": "lighter",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "A lightweight Node.js framework",
   "dependencies": {
     "beams": "^0.1.1",
@@ -9,7 +9,6 @@
     "d6": "^0.2.1",
     "jymin": "^0.4.1",
     "ltl": "^0.2.0",
-    "mc": "^1.0.6",
     "ormy": "^0.3.0",
     "splode": "^0.1.0",
     "tat": "^0.0.1",
