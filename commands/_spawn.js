@@ -21,7 +21,7 @@ module.exports = function (env) {
   var dir = process.env.LIGHTER_DIR || process.cwd();
   process.env.NODE_ENV = env;
 
-  if (/^(dev|debug)/.test(env)) {
+  //if (/^(dev|debug)/.test(env)) {
     var watcher = watch(dir, {
       maxListSize: 1e4,
       notifyInterval: 1
@@ -34,7 +34,7 @@ module.exports = function (env) {
         });
       }
     });
-  }
+  //}
 
   var previousStart = new Date(0);
   var failureOutput;

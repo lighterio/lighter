@@ -3,19 +3,19 @@
   "version": "1.0.0",
   "description": "A lightweight Node.js framework",
   "dependencies": {
-    "beams": "^0.1.1",
-    "cedar": "^0.2.0",
-    "chug": "^0.3.1",
-    "d6": "^0.2.1",
-    "jymin": "^0.4.1",
-    "ltl": "^0.2.0",
-    "ormy": "^0.3.0",
-    "splode": "^0.1.0",
-    "tat": "^0.0.1",
-    "za": "^0.2.0"
+    "beams": "^1.0.0",
+    "cedar": "^1.0.0",
+    "chug": "^1.0.0",
+    "einstein": "^1.0.0",
+    "jymin": "^1.0.0",
+    "ltl": "^1.0.0",
+    "ormy": "^1.0.0",
+    "splode": "^1.0.0",
+    "tat": "^1.0.0",
+    "za": "^1.0.0"
   },
   "devDependencies": {
-    "exam": "^0.2.2",
+    "exam": "^1.0.0",
     "express": "4.9.0"
   },
   "keywords": [
