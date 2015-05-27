@@ -59,6 +59,21 @@ Then you can run your app with Node.
 ```bash
 node app
 ```
+Alternatively, you can create a package.json file in your project and add lighter as a dependency:
+```bash
+{
+  "name": "Lighter-app",
+  "version": "0.0.1",
+  "dependencies": {
+    "lighter": "~0.2.7"
+  }
+}
+```
+Then update and run your app with Node.
+```bash
+npm update
+node app
+```
 
 Soon, this setup process will be replaced with a CLI that will go something like:
 ```bash
