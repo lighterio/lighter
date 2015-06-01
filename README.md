@@ -56,7 +56,7 @@ var app = lighter({
 
   initJymin: lighter.no,
 
-  initEinstein: lighter.no
+  initPorta: lighter.no
 
 });
 ```
