@@ -8,51 +8,50 @@
  * @import event/emitter
  */
 
-var Emitter = require('../event/emitter');
-var Flagger = module.exports = Emitter.extend({
-
+var Emitter = require('../event/emitter')
+module.exports = Emitter.extend({
   /**
    * Get the value of a flag.
    */
   getFlag: function (flag) {
-    return (this._flags || 0)[flag];
+    return (this._flags || 0)[flag]
   },
 
   /**
    * Set a flag, like "ready" and emit its value.
    */
   setFlag: function (flag, value) {
-    var self = this;
-    var flags = self._flags || (self._flags = {});
+    var self = this
+    var flags = self._flags || (self._flags = {})
     if (arguments.length < 2) {
-      value = true;
+      value = true
     }
     if (flags[flag] !== value) {
-      flags[flag] = value;
-      self.emit(flag, value);
-      self.emit(flag + ':' + value);
+      flags[flag] = value
+      self.emit(flag, value)
+      self.emit(flag + ':' + value)
     }
-    return self;
+    return self
   },
 
   /**
    * Fire an event when a flag is set (even if it was set in the past).
    */
   when: function (flag, value, fn) {
-    var self = this;
-    var flags = self._flags;
+    var self = this
+    var flags = self._flags
     if (arguments.length < 3) {
-      fn = value;
-      value = true;
+      fn = value
+      value = true
     }
     if (flags) {
       if (flags[flag] === value) {
-        fn.apply(self);
-        return self;
+        fn.apply(self)
+        return self
       }
     }
-    self.on(flag + ':' + value, fn);
-    return self;
+    self.on(flag + ':' + value, fn)
+    return self
   }
 
-});
+})

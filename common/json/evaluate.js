@@ -6,14 +6,13 @@
  */
 
 var evaluate = module.exports = JSON.evaluate = function (js, fallback) {
-  delete evaluate.error;
+  delete evaluate.error
   try {
     eval('JSON.evaluate.value=' + js); // jshint ignore:line
-    return evaluate.value;
+    return evaluate.value
+  } catch (error) {
+    error.message += '\nJS: ' + js
+    evaluate.error = error
+    return fallback
   }
-  catch (error) {
-    error.message += '\nJS: ' + js;
-    evaluate.error = error;
-    return fallback;
-  }
-};
+}

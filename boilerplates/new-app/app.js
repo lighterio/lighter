@@ -1,4 +1,4 @@
-var lighter = require('lighter');
+var lighter = require('lighter')
 
 var app = module.exports = lighter({
 
@@ -17,4 +17,4 @@ var app = module.exports = lighter({
 
   }
 
-});
+})

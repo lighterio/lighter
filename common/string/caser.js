@@ -16,65 +16,63 @@
  */
 
 var caser = module.exports = {
-
   split: function (name) {
-    return name.replace(/([a-z])([A-Z])/g, '$1 $2').split(/[_-\s]+/g);
+    return name.replace(/([a-z])([A-Z])/g, '$1 $2').split(/[_-\s]+/g)
   },
 
   camel: function (name) {
-    var words = caser.split(name);
+    var words = caser.split(name)
     for (var i = 0, l = words.length; i < l; i++) {
-      var word = words[i];
+      var word = words[i]
       if (i) {
-        words[i] = word[0].toUpperCase() + word.substr(1).toLowerCase();
-      }
-      else {
-        words[i] = word.toLowerCase();
+        words[i] = word[0].toUpperCase() + word.substr(1).toLowerCase()
+      } else {
+        words[i] = word.toLowerCase()
       }
     }
-    return words.join('');
+    return words.join('')
   },
 
   title: function (name) {
-    var words = caser.split(name);
+    var words = caser.split(name)
     for (var i = 0, l = words.length; i < l; i++) {
-      var word = words[i];
-      words[i] = word[0].toUpperCase() + word.substr(1).toLowerCase();
+      var word = words[i]
+      words[i] = word[0].toUpperCase() + word.substr(1).toLowerCase()
     }
-    return words.join('');
+    return words.join('')
   },
 
   snake: function (name) {
-    return caser.split(name).join('_').toLowerCase();
+    return caser.split(name).join('_').toLowerCase()
   },
 
   scream: function (name) {
-    return caser.split(name).join('_').toUpperCase();
+    return caser.split(name).join('_').toUpperCase()
   },
 
   oxford: function (name) {
-    var words = caser.split(name);
+    var words = caser.split(name)
     for (var i = 0, l = words.length; i < l; i++) {
-      var word = words[i];
-      words[i] = word[0].toUpperCase() + word.substr(1).toLowerCase();
+      var word = words[i]
+      words[i] = word[0].toUpperCase() + word.substr(1).toLowerCase()
     }
-    return words.join('_');
+    return words.join('_')
   },
 
   spinal: function (name) {
-    return caser.split(name).join('-').toLowerCase();
+    return caser.split(name).join('-').toLowerCase()
   },
 
   train: function (name) {
-    return caser.split(name).join('-').toUpperCase();
+    return caser.split(name).join('-').toUpperCase()
   },
 
   private: function (name) {
-    return '_' + caser.camel(name);
+    return '_' + caser.camel(name)
   },
 
   shrinker: function (name) {
-    return '';
+    return ''
   }
 
-};
+}

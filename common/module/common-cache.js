@@ -11,31 +11,31 @@
  * @version 0.0.1
  */
 
-var Module = require('module');
-var key = '_lighterCommonCache_0_0_1';
-var cache = Module[key];
+var Module = require('module')
+var key = '_lighterCommonCache_0_0_1'
+var cache = Module[key]
 
 // If the cache doesn't exist yet, create it.
 if (!cache) {
 
-  cache = Module[key] = {};
+  cache = Module[key] = {}
 
   // TODO: Test this with older versions of Node.
   Module.prototype.require = function (path) {
-    var module;
-    var key;
+    var module
+    var key
     path.replace(/^.*\/common\/([^\/]+\/[^\/]+)$/, function (match, name) {
-      key = name;
-      module = cache[key];
-    });
+      key = name
+      module = cache[key]
+    })
     if (!module) {
-      module = Module._load(path, this);
+      module = Module._load(path, this)
       if (key) {
-        cache[key] = module;
+        cache[key] = module
       }
     }
-    return module;
-  };
+    return module
+  }
 }
 
-module.exports = cache;
+module.exports = cache

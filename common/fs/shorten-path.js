@@ -7,20 +7,20 @@
  */
 
 var shortenPath = module.exports = function (path) {
-  var dirs = shortenPath.dirs;
+  var dirs = shortenPath.dirs
   for (var i = 0; i < 2; i++) {
-    var dir = dirs[i];
+    var dir = dirs[i]
     if (dir[0] && (path.indexOf(dir[0]) === 0)) {
-      return dir[1] + path.substr(dir[0].length);
+      return dir[1] + path.substr(dir[0].length)
     }
   }
-  return path;
-};
+  return path
+}
 
 /**
  * Preload cwd and home, but expose them so they can be changed upon chdir.
  */
-shortenPath.dirs = [
-  [process.cwd() + '/', './'],
-  [process.env.HOME + '/', '~/']
-];
+var cwd = [process.cwd() + '/', './']
+var home = [process.env.HOME + '/', '~/']
+shortenPath.dirs = [cwd, home]
+

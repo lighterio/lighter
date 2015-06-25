@@ -7,16 +7,16 @@
  */
 
 // Ensure that we can generate non-strict JSON.
-var scriptify = require(__dirname + '/scriptify');
+var scriptify = require(__dirname + '/scriptify')
 
 /**
  * Write non-strict JSON objects to a stream.
  */
 JSON.writeStream = function (stream, fn) {
-  var write = stream.write;
+  var write = stream.write
   stream.write = function (object) {
-    var js = scriptify(object);
-    return write.call(stream, js + '\n', 'utf-8', fn);
-  };
-  return stream;
-};
+    var js = scriptify(object)
+    return write.call(stream, js + '\n', 'utf-8', fn)
+  }
+  return stream
+}

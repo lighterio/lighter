@@ -1,18 +1,18 @@
-var lighter = require('../lighter');
+var lighter = require('../lighter')
 
 describe('API', function () {
 
   it('should create an app', function () {
-    var cwd = process.cwd();
+    var cwd = process.cwd()
     mock(console, {
       log: mock.ignore(),
       warn: mock.ignore()
-    });
+    })
     var App = lighter({
       dir: process.cwd() + '/test/test-files',
       log: ['blackhole'],
       processCount: 1
-    });
-  });
+    })
+  })
 
-});
+})
