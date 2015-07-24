@@ -9,6 +9,5 @@
 
 Jymin.insertCss('CSS_TEXT')
 var head = Jymin.getHead()
-if (!window._isMobileApp) {
-  Jymin.addElement(head, 'link?rel=shortcut icon&href=/favicon.ico?v=CACHE_BUST')
-}
+
+//Jymin.addElement(head, 'link?rel=shortcut icon&href=/favicon.ico?v=CACHE_BUST')

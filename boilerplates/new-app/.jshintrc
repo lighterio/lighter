@@ -6,6 +6,7 @@
   "node": true,
   "quotmark": false,
   "loopfunc": true,
+  "asi": true,
   "globals": {
     "Beams": false,
     "Porta": false,
