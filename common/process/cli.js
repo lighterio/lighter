@@ -82,7 +82,7 @@ cli.exit = function (message) {
  * Log an error message and exit the process.
  */
 cli.error = function (message) {
-  cli.exit('Error: '.red + message.replace(/("\S.*?\S")/g, '$1'.yellow))
+  cli.exit('Error: '.red + message.replace(/(".*?")/g, '$1'.yellow))
 }
 
 /**

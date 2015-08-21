@@ -10,6 +10,7 @@
 
 var Emitter = require('../event/emitter')
 module.exports = Emitter.extend({
+
   /**
    * Get the value of a flag.
    */

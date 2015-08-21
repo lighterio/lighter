@@ -5,9 +5,12 @@
  * interfere with critical features.
  *
  * @use jymin/jymin.js
+ * @use mimo/scripts/mimo-jymin.js
  */
 
 Jymin.insertCss('CSS_TEXT')
 var head = Jymin.getHead()
 
-//Jymin.addElement(head, 'link?rel=shortcut icon&href=/favicon.ico?v=CACHE_BUST')
+if ((window._platform || 'web') == 'web') {
+  Jymin.addElement(head, 'link?rel=shortcut icon&href=/favicon.ico?v=CACHE_BUST')
+}
