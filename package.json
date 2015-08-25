@@ -3,18 +3,18 @@
   "version": "1.0.0",
   "description": "A lightweight Node.js framework",
   "dependencies": {
-    "beams": "^1.0.0",
-    "cedar": "^1.0.0",
-    "chug": "^1.0.0",
-    "porta": "^1.0.0",
-    "jymin": "^1.0.0",
-    "lighter": "^1.0.0",
-    "ltl": "^1.0.0",
-    "ormy": "^1.0.0",
-    "za": "^1.0.0"
+    "beams": "git+https://github.com/zerious/beams.git",
+    "cedar": "git+https://github.com/zerious/cedar.git",
+    "chug": "git+https://github.com/zerious/chug.git",
+    "porta": "git+https://github.com/lighterio/porta.git",
+    "jymin": "git+https://github.com/zerious/jymin.git",
+    "lighter": "git+https://github.com/zerious/lighter.git",
+    "ltl": "git+https://github.com/zerious/ltl.git",
+    "ormy": "git+https://github.com/zerious/ormy.git",
+    "za": "git+https://github.com/zerious/za.git"
   },
   "devDependencies": {
-    "exam": "^1.0.0",
+    "exam": "git+https://github.com/zerious/exam.git",
     "express": "4.9.0"
   },
   "keywords": [
@@ -29,7 +29,7 @@
   ],
   "main": "lighter.js",
   "bin": {
-    "lighter": "lighter.js",
+    "lighter": "git+https://github.com/zerious/lighter.git",
     "lighter-iojs": "lighter-iojs.js"
   },
   "engines": {

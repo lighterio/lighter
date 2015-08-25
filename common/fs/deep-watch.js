@@ -33,7 +33,7 @@ var deepWatch = module.exports = function (dir, options) {
 
 // Remember options and watched files.
 var dir
-var ignoreDir = /\/(logs?|data|\.[^\/]+)$/
+var ignoreDir = /\/(logs?|data|xcuserdata|\.[^\/]+)$/
 var ignoreFile = /\/(\.subl[\w\d]+\.tmp|[^\/]+\.swp)$/
 var maxFsWatches
 var maxListSize

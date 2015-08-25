@@ -8,9 +8,17 @@
  * @use mimo/scripts/mimo-jymin.js
  */
 
-Jymin.insertCss('CSS_TEXT')
-var head = Jymin.getHead()
+// Tokens will be populated by Lighter.
+var cssText = 'CSS_TEXT'
+var cacheBust = 'CACHE_BUST'
+console.log(window._zoom)
+console.log(Jymin.insertCss.toString())
 
+// Add the CSS into the page.
+Jymin.insertCss(cssText)
+
+// Load the favicon lazily, if accessed from a web browser.
+var head = Jymin.getHead()
 if ((window._platform || 'web') == 'web') {
-  Jymin.addElement(head, 'link?rel=shortcut icon&href=/favicon.ico?v=CACHE_BUST')
+  Jymin.addElement(head, 'link?rel=shortcut icon&href=/favicon.ico?v=' + cacheBust)
 }
