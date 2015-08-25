@@ -29,7 +29,7 @@
   ],
   "main": "lighter.js",
   "bin": {
-    "lighter": "0.3.0",
+    "lighter": "lighter.js",
     "lighter-iojs": "lighter-iojs.js"
   },
   "engines": {
