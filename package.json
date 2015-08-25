@@ -1,6 +1,6 @@
 {
   "name": "lighter",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A lightweight Node.js framework",
   "dependencies": {
     "beams": "0.2.0",
@@ -8,13 +8,12 @@
     "chug": "0.4.0",
     "porta": "0.1.0",
     "jymin": "0.5.0",
-    "lighter": "0.3.0",
     "ltl": "0.2.0",
     "ormy": "0.4.0",
     "za": "0.2.0"
   },
   "devDependencies": {
-    "exam": "0.3.0",
+    "exam": "0.3.1",
     "express": "4.9.0"
   },
   "keywords": [
