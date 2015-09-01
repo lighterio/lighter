@@ -3,19 +3,19 @@
   "version": "0.3.0",
   "description": "A lightweight Node.js framework",
   "dependencies": {
-    "beams": "0.2.0",
-    "cedar": "0.3.0",
-    "chug": "0.4.0",
-    "porta": "0.1.0",
-    "jymin": "0.5.0",
-    "ltl": "0.2.0",
+    "beams": ">=0.2.1",
+    "cedar": ">=0.3.1",
+    "chug": ">=0.4.1",
+    "porta": ">=0.1.1",
+    "jymin": ">=0.5.1",
+    "ltl": ">=0.3.1",
     "mc": "^1.0.6",
-    "ormy": "0.4.0",
+    "ormy": ">=0.4.1",
     "splode": "^0.1.0",
-    "za": "0.2.0"
+    "za": ">=0.2.1"
   },
   "devDependencies": {
-    "exam": "0.3.1",
+    "exam": ">=0.3.2",
     "express": "4.9.0"
   },
   "keywords": [
@@ -30,7 +30,7 @@
   ],
   "main": "lighter.js",
   "bin": {
-    "lighter": "0.3.1",
+    "lighter": ">=0.3.2",
     "lighter-iojs": "lighter-iojs.js"
   },
   "engines": {
